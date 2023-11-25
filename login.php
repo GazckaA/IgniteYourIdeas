@@ -7,8 +7,7 @@
     <title>LogIn</title>
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
 
     <!-- Boostrap-->
     <link rel="stylesheet" href="https://bootswatch.com/5/quartz/bootstrap.min.css">

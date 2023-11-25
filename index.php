@@ -10,8 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,51 +39,33 @@
   ======================================================== -->
 </head>
 
-<body>
+<body style="background-image: url(assets/img/i2.jpg);">
 
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center  me-auto me-lg-0">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <i class="bi bi-camera"></i>
-        <h1>PhotoFolio</h1>
+        <img src="assets/img/Drills4You logo fini.png" alt="">
       </a>
 
-      <nav id="navbar" class="navbar">
+      <nav id="navbar" class="navbar me-1">
         <ul>
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li class="dropdown"><a href="#"><span>Gallery</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="gallery.html">Nature</a></li>
-              <li><a href="gallery.html">People</a></li>
-              <li><a href="gallery.html">Architecture</a></li>
-              <li><a href="gallery.html">Animals</a></li>
-              <li><a href="gallery.html">Sports</a></li>
-              <li><a href="gallery.html">Travel</a></li>
-              <li class="dropdown"><a href="#"><span>Sub Menu</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                <ul>
-                  <li><a href="#">Sub Menu 1</a></li>
-                  <li><a href="#">Sub Menu 2</a></li>
-                  <li><a href="#">Sub Menu 3</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="index.html" class="active">Contemplate</a></li>
+          <li><a href="connect.html">Connect</a></li>
+          <li><a href="create.html" class="me-0 me-lg-2">Create</a></li>
+          <li><a href="profile.html" class="me-0 me-lg-2 d-xxl-none">Profile</a></li>
+          <li><form class="d-flex m-2 m-xxl-0">
+                <input class="form-control me-sm-2" type="search" placeholder="Search" required>
+                <button class="btn btn-outline-light-sm my-2 my-sm-0" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form></li>
+          <li class="d-none d-xxl-block"><button class="btn btn-outline-light-smy mx-2" type="submit">
+                    <i class="bi bi-person-circle"></i>
+                </button></li>
         </ul>
       </nav><!-- .navbar -->
-
-      <div class="header-social-links">
-        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-      </div>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
@@ -104,33 +85,229 @@
                   </div>
                   <div class="blog-slider__text">
                       <p style="color: black;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?</p>
-                  </div><a class="blog-slider__button" href="#">READ MORE</a>
+                  </div><a href="register.php"><button class="btn btn-dark " data-bss-hover-animate="pulse" id="button1" type="button"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>READ MORE</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button></a>
               </div>
           </div>
           <div class="blog-slider__item swiper-slide">
-            <div class="blog-slider__img"><img src="https://images.unsplash.com/photo-1700819000381-5a5f14e5de3c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></div>
-            <div class="blog-slider__content"><span class="blog-slider__code">26 December 2019</span>
-                <div class="blog-slider__title">
-                    <p style="color: black;">Lorem Ipsum Dolor</p>
-                </div>
-                <div class="blog-slider__text">
-                    <p style="color: black;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?</p>
-                </div><a class="blog-slider__button" href="#">READ MORE</a>
-            </div>
-        </div>
+              <div class="blog-slider__img"><img src="https://images.unsplash.com/photo-1700819000381-5a5f14e5de3c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></div>
+              <div class="blog-slider__content"><span class="blog-slider__code">26 December 2019</span>
+                  <div class="blog-slider__title">
+                      <p style="color: black;">Lorem Ipsum Dolor</p>
+                  </div>
+                  <div class="blog-slider__text">
+                      <p style="color: black;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?</p>
+                  </div><a href="register.php"><button class="btn btn-dark " data-bss-hover-animate="pulse" id="button1" type="button"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>READ MORE</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button></a>
+              </div>
+          </div>
+
       </div>
       <div class="blog-slider__pagination"></div>
     </div>
 
   </section><!-- End Hero Section -->
 
-  <main id="main" data-aos="fade" data-aos-delay="1500">
+  <main id="main" class="mb-4" data-aos="fade" data-aos-delay="1500" >
 
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery">
       <div class="container-fluid">
 
         <div class="row gy-4 justify-content-center">
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
+                  </div>
+                  <div class="col-12 text-end">
+                    <strong>-@username</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
+                  </div>
+                  <div class="col-12 text-end">
+                    <strong>-@username</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
+                  </div>
+                  <div class="col-12 text-end">
+                    <strong>-@username</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
+                  </div>
+                  <div class="col-12 text-end">
+                    <strong>-@username</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
+                  </div>
+                  <div class="col-12 text-end">
+                    <strong>-@username</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
+                  </div>
+                  <div class="col-12 text-end">
+                    <strong>-@username</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
+                  </div>
+                  <div class="col-12 text-end">
+                    <strong>-@username</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
+                  </div>
+                  <div class="col-12 text-end">
+                    <strong>-@username</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
+                  </div>
+                  <div class="col-12 text-end">
+                    <strong>-@username</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
+                  </div>
+                  <div class="col-12 text-end">
+                    <strong>-@username</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
+                  </div>
+                  <div class="col-12 text-end">
+                    <strong>-@username</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
+                  </div>
+                  <div class="col-12 text-end">
+                    <strong>-@username</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
+                <div class="row m-0">
+                  <div class="col-12">
+                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
+                  </div>
+                  <div class="col-12 text-end">
+                    <strong>-@username</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
           <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="gallery-item h-100">
               <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
@@ -170,7 +347,7 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+  <footer id="footer" class="footer d-none">
     <div class="container">
       <div class="copyright">
         &copy; Copyright <strong><span>PhotoFolio</span></strong>. All Rights Reserved
@@ -205,6 +382,9 @@
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/responsive-blog-card-slider-01-swiper-bundle.min.js"></script>
   <script src="assets/js/responsive-blog-card-slider-02-responsive-blog-card-slider.js"></script>
+
+  <!--Button-->
+  <script src="assets/js/bs-init.js"></script>
 
 </body>
 
