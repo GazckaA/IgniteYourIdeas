@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Register</title>
+    <title>Sign Up</title>
 
     <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon">
@@ -22,8 +22,10 @@
 
     <!-- AOS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
     <!-- Custom CSS for login & register-->
+    <link rel="stylesheet" href="assets/css/Landing-Page---Parallax-Background---Logo-Heading-ButtonGIF.css">
     <link rel="stylesheet" href="assets/css/Login-with-overlay-image.css">
 </head>
 
@@ -82,7 +84,7 @@
                                     </div>
                                     <div class="row m-0">
                                         <div class="col-12">
-                                            <a href="register.php"><button class="btn btn-primary " data-bss-hover-animate="pulse" id="button1" type="button"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>READY!</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button></a>
+                                            <button class="btn btn-primary " data-bss-hover-animate="pulse" id="button1" type="button"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>READY!</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button>
                                         </div>
                                     </div>                                    
                                 </form>
@@ -95,7 +97,8 @@
             </div>
             <!-- end card -->
 
-            <p class="text-muted text-center mt-3 mb-0">Already have an account? <a href="login.php" class="text-light ml-1">Log In</a></p>
+            <p class="text-muted text-center mt-3 mb-0">Already have an account? <a href="login.php" class="text-light ml-1" style="text-decoration: underline;">Log In</a></p>
+            
 
             <!-- end row -->
 

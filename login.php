@@ -16,8 +16,10 @@
 
     <!-- AOS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
     <!-- Custom CSS for login & register-->
+    <link rel="stylesheet" href="assets/css/Landing-Page---Parallax-Background---Logo-Heading-ButtonGIF.css">
     <link rel="stylesheet" href="assets/css/Login-with-overlay-image.css">
 </head>
 
@@ -46,7 +48,7 @@
                                     </div>
                                     <div class="row m-0">
                                         <div class="col-12">
-                                            <a href="register.php"><button class="btn btn-primary " data-bss-hover-animate="pulse" id="button1" type="button"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>GO!</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button></a>
+                                            <button class="btn btn-primary " data-bss-hover-animate="pulse" id="button1" type="button"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>GO!</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button>
                                         </div>
                                         <div class="col-12">
                                             <a href="#l" class="forgot-link float-right text-light m-2">Forgot password?</a>
@@ -74,7 +76,7 @@
             </div>
             <!-- end card -->
 
-            <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="register.php" class="text-light ml-1">Register</a></p>
+            <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="register.php" class="text-light ml-1">Sign Up</a></p>
 
             <!-- end row -->
 
