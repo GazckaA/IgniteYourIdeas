@@ -25,11 +25,11 @@
 <body><div id="main-wrapper" class="container">
     <div class="row justify-content-center">
         <div class="col-xl-10">
-            <div class="card border-0 ">
+            <div class="card border-0 my-2 my-lg-0">
                 <div class="card-body p-0">
                     <div class="row no-gutters ">
                         <div class="col-lg-6">
-                            <div class="p-5">
+                            <div class="p-1 p-lg-5">
                                 <div class="mb-4">
                                     <h1 class="h4 font-weight-bold text-theme text-center">LOGIN</h1>
                                 </div>
