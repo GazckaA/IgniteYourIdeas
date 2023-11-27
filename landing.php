@@ -24,12 +24,12 @@ if(isset($_SESSION['loggedin'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="assets/css/Landing-Page---Parallax-Background---Logo-Heading-ButtonGIF.css">
 </head>
-<body>
+<body >
 
     <div>
-        <div id="box-2"><img data-aos="fade" data-aos-duration="2500" data-aos-delay="700" id="logoimage1" src="assets/img/Drills4You%20logo%20fini.png">
+        <div id="box-2" ><img data-aos="fade" data-aos-duration="2500" data-aos-delay="700" id="logoimage1" src="assets/img/Drills4You%20logo%20fini.png">
             <h1 data-aos="fade" data-aos-duration="2000" data-aos-delay="700" id="heading1" >WORDS THAT CONNECT, <br class="d-block d-md-none">IDEAS THAT IGNITE</h1>
-            <div class="row m-0" data-aos="fade" data-aos-duration="2500" data-aos-delay="1300" >
+            <div class="row m-0 mb-5" data-aos="fade" data-aos-duration="2500" data-aos-delay="1300" >
                 <div class="col-12 ">
                     <a href="register.php"><button class="btn btn-primary " data-bss-hover-animate="pulse" id="button1" type="button"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>YOUR JOURNEY BEGINS HERE</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button></a>
                 </div>

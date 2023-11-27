@@ -62,25 +62,55 @@ if(isset($_POST['operation']) && $_POST['operation'] == 'logout'){
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center  me-auto me-lg-0">
+      <a  class="logo d-flex align-items-center  me-auto me-lg-0">
         <img src="assets/img/Drills4You logo fini.png" alt="">
       </a>
 
       <nav id="navbar" class="navbar me-1">
         <ul>
-          <li><a href="index.html" class="active">Contemplate</a></li>
-          <li><a href="connect.html">Connect</a></li>
-          <li><a href="create.html" class="me-0 me-lg-2">Create</a></li>
-          <li><a href="profile.html" class="me-0 me-lg-2 d-xxl-none">Profile</a></li>
+          <li><a class="active">Contemplate</a></li>
+          <li><a href="connect.php">Connect</a></li>
+          <li><a href="create.php" class="me-0 me-lg-2">Create</a></li>
+          <li class="nav-item dropdown d-xxl-none">
+            <a class="nav-link dropdown-toggle me-0 me-lg-2" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile</a>
+                <div class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 42px);" data-popper-placement="bottom-start">
+                  <form action="profile.php" method="get">
+                    <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
+                    <button class="btn btn-link mx-2" type="submit">
+                      My profile
+                    </button>
+                  </form>
+                  <form action="index.php" method="post">
+                    <input type="hidden" name="operation" value="logout">
+                    <button type="submit" class="btn btn-link mx-2">
+                        Close session
+                    </button>
+                  </form>
+                </div>
+          </li>
           <li><form class="d-flex m-2 m-xxl-0">
                 <input class="form-control me-sm-2" type="search" placeholder="Search" required>
                 <button class="btn btn-outline-light-sm my-2 my-sm-0" type="submit">
                     <i class="bi bi-search"></i>
                 </button>
             </form></li>
-          <li class="d-none d-xxl-block"><button class="btn btn-outline-light-smy mx-2" type="submit">
-                    <i class="bi bi-person-circle"></i>
-                </button></li>
+          <li class="nav-item dropdown d-none d-xxl-block">
+            <a class="nav-link dropdown-toggle me-0 me-lg-2" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle"></i></a>
+                <div class="dropdown-menu dropdown-menu-end" data-popper-placement="bottom-start">
+                  <form action="profile.php" method="get">
+                    <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
+                    <button class="btn btn-link mx-2" type="submit">
+                      My profile
+                    </button>
+                  </form>
+                  <form action="index.php" method="post">
+                    <input type="hidden" name="operation" value="logout">
+                    <button type="submit" class="btn btn-link mx-2">
+                        Close session
+                    </button>
+                  </form>
+                </div>
+          </li>
         </ul>
       </nav><!-- .navbar -->
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
@@ -121,13 +151,6 @@ if(isset($_POST['operation']) && $_POST['operation'] == 'logout'){
       <div class="blog-slider__pagination"></div>
     </div>
   </section><!-- End Hero Section -->
-  <!-- ======= Boton de cerrar sesion ======= -->
-  <form action="index.php" method="post">
-      <input type="hidden" name="operation" value="logout">
-      <button type="submit" class="btn btn-light my-2 my-sm-0">
-          Close session
-      </button>
-  </form>
   <!-- ======= Main ======= -->
   <main id="main" class="mb-4" data-aos="fade" data-aos-delay="1500" >
 
