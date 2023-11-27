@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 
@@ -67,16 +67,8 @@ class User{
 
         // Consulta preparada
         $stmt = $mysqli->prepare("INSERT INTO users (name, lastname, username, email, password) VALUES (?, ?, ?, ?, ?)");
-        if (!$stmt) {
-            die("Error en la preparación de la consulta: " . $mysqli->error);
-        }
         $stmt->bind_param("sssss", $sanitizedName, $sanitizedLastname, $sanitizedUsername, $sanitizedEmail, $sanitizedPassword);
-        if (!$stmt) {
-            die("Error al vincular parámetros: " . $stmt->error);
-        }
-        if (!$stmt->execute()) {
-            die("Error en la ejecución de la consulta: " . $stmt->error);
-        }
+        $stmt->execute()
         $result = $stmt->get_result();
 
         // Verificar si se encontraron resultados
