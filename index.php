@@ -71,22 +71,25 @@ if(isset($_POST['operation']) && $_POST['operation'] == 'logout'){
           <li><a class="active">Contemplate</a></li>
           <li><a href="connect.php">Connect</a></li>
           <li><a href="create.php" class="me-0 me-lg-2">Create</a></li>
-          <li class="nav-item dropdown d-xxl-none">
-            <a class="nav-link dropdown-toggle me-0 me-lg-2" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile</a>
-                <div class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 42px);" data-popper-placement="bottom-start">
-                  <form action="profile.php" method="get">
+          <li class="dropdown d-xxl-none me-0 me-lg-2"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li>
+                <form action="profile.php" method="get">
                     <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
                     <button class="btn btn-link mx-2" type="submit">
-                      My profile
+                      MY PROFILE
                     </button>
                   </form>
-                  <form action="index.php" method="post">
+              </li>
+              <li>
+                <form action="index.php" method="post">
                     <input type="hidden" name="operation" value="logout">
                     <button type="submit" class="btn btn-link mx-2">
-                        Close session
+                        CLOSE SESSSION
                     </button>
                   </form>
-                </div>
+              </li>
+            </ul>
           </li>
           <li><form class="d-flex m-2 m-xxl-0">
                 <input class="form-control me-sm-2" type="search" placeholder="Search" required>
@@ -95,18 +98,18 @@ if(isset($_POST['operation']) && $_POST['operation'] == 'logout'){
                 </button>
             </form></li>
           <li class="nav-item dropdown d-none d-xxl-block">
-            <a class="nav-link dropdown-toggle me-0 me-lg-2" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle"></i></a>
+            <a class="nav-link dropdown-toggle me-0 me-lg-2" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle dropdown-indicator"></i></a>
                 <div class="dropdown-menu dropdown-menu-end" data-popper-placement="bottom-start">
                   <form action="profile.php" method="get">
                     <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
                     <button class="btn btn-link mx-2" type="submit">
-                      My profile
+                      MY PROFILE
                     </button>
                   </form>
                   <form action="index.php" method="post">
                     <input type="hidden" name="operation" value="logout">
                     <button type="submit" class="btn btn-link mx-2">
-                        Close session
+                        CLOSE SESSION
                     </button>
                   </form>
                 </div>

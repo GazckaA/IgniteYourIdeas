@@ -15,7 +15,7 @@ if(!isset($_SESSION['loggedin'])){
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Profile</title>
+  <title>Post</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -60,9 +60,18 @@ if(!isset($_SESSION['loggedin'])){
         <ul>
           <li><a href="index.php">Contemplate</a></li>
           <li><a href="connect.php">Connect</a></li>
-          <li><a href="create.php" class="me-0 me-lg-2">Create</a></li>
-          <li class="dropdown active d-xxl-none me-0 me-lg-2"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li><a href="create.php">Create</a></li>
+          <li><a class="me-0 me-lg-2 active">Post</a></li>
+          <li class="dropdown d-xxl-none me-0 me-lg-2"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
+              <li>
+                <form action="profile.php" method="get">
+                    <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
+                    <button class="btn btn-link mx-2" type="submit">
+                      MY PROFILE
+                    </button>
+                  </form>
+              </li>
               <li>
                 <form action="index.php" method="post">
                     <input type="hidden" name="operation" value="logout">
@@ -82,6 +91,12 @@ if(!isset($_SESSION['loggedin'])){
           <li class="nav-item dropdown d-none d-xxl-block">
             <a class="nav-link dropdown-toggle me-0 me-lg-2 active" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle dropdown-indicator"></i></a>
                 <div class="dropdown-menu dropdown-menu-end">
+                  <form action="profile.php" method="get">
+                    <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
+                    <button class="btn btn-link mx-2" type="submit">
+                      MY PROFILE
+                    </button>
+                  </form>
                   <form action="index.php" method="post">
                     <input type="hidden" name="operation" value="logout">
                     <button type="submit" class="btn btn-link mx-2">
@@ -105,119 +120,89 @@ if(!isset($_SESSION['loggedin'])){
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>@User</h2>
-            <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
+            <h2>Title</h2>
 
-            <a class="cta-btn" href="">Edit Profile</a>
+            <a class="cta-btn rounded-pill" href="contact.html">Edit post</a>
 
           </div>
         </div>
       </div>
     </div><!-- End Page Header -->
 
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+    <!-- ======= Gallery Single Section ======= -->
+    <section id="gallery-single" class="gallery-single">
       <div class="container">
 
-        <div class="row gy-4 justify-content-center">
-          <div class="col-lg-4">
-            <img src="https://learnenglish.britishcouncil.org/sites/podcasts/files/2021-10/RS6715_492969113-hig.jpg" class="img-fluid rounded" alt="">
-          </div>
-          <div class="col-lg-5 content">
-            <h2>More about me:</h2>
-            <div class="row">
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Name:</strong> <span>Ian</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Last Name:</strong> <span>Gazcka</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>1 May 1995</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>30</span></li>
-                </ul>
+        <div class="position-relative h-100">
+          <div class="slides-1 portfolio-details-slider swiper">
+            <div class="swiper-wrapper align-items-center">
+
+              <div class="swiper-slide">
+                <img src="assets/img/gallery/gallery-8.jpg" alt="" class="rounded">
               </div>
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>email@example.com</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Role:</strong> <span>Reader</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Posts:</strong> <span>3</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Since:</strong> <span>2023-nov-27</span></li>
-                </ul>
-              </div>
+
             </div>
           </div>
+
         </div>
 
-      </div>
-    </section><!-- End About Section -->
+        <div class="row justify-content-between gy-4 mt-4">
 
-    <!-- ======= Gallery Section ======= -->
-    <section id="gallery" class="gallery">
-      <div class="container-fluid">
+          <div class="col-lg-8">
+            <div class="portfolio-description">
+              <h2>This is an example of portfolio detail</h2>
+              <p>
+                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+              </p>
+              <p>
+                Amet consequatur qui dolore veniam voluptatem voluptatem sit. Non aspernatur atque natus ut cum nam et. Praesentium error dolores rerum minus sequi quia veritatis eum. Eos et doloribus doloremque nesciunt molestiae laboriosam.
+              </p>
 
-        <div class="container">
-            <div class="section-header">
-            <h2>Posts</h2>
-            <p>@user's most recent thoughts</p>
-            </div>
-        </div>
+              <p>
+                Impedit ipsum quae et aliquid doloribus et voluptatem quasi. Perspiciatis occaecati earum et magnam animi. Quibusdam non qui ea vitae suscipit vitae sunt. Repudiandae incidunt cumque minus deserunt assumenda tempore. Delectus voluptas necessitatibus est.
 
-        <div class="row gy-4 justify-content-center">
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
-              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
-                <div class="row m-0">
-                  <div class="col-12">
-                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
-                  </div>
-                  <div class="col-12 text-end">
-                    <strong>-@username</strong>
-                  </div>
-                </div>
-              </div>
+              <p>
+                Sunt voluptatum sapiente facilis quo odio aut ipsum repellat debitis. Molestiae et autem libero. Explicabo et quod necessitatibus similique quis dolor eum. Numquam eaque praesentium rem et qui nesciunt.
+              </p>
+
             </div>
-          </div><!-- End Gallery Item -->
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
-              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
-                <div class="row m-0">
-                  <div class="col-12">
-                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
-                  </div>
-                  <div class="col-12 text-end">
-                    <strong>-@username</strong>
-                  </div>
-                </div>
-              </div>
+          </div>
+
+          <div class="col-lg-3">
+            <div class="portfolio-info">
+              <h3>Author information:</h3>
+              <ul>
+                <li><strong>Name:</strong> <span>Ian</span></li>
+                <li><strong>Post date:</strong> <span>01 March, 2022</span></li>
+                <li><strong>Username:</strong> <a href="#">@user</a></li>
+                <li >
+                  <form action="profile.php" method="get" id="gotoprofile">
+                    <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
+                  </form>
+                  <button class="btn btn-visit" type="submit" form="gotoprofile">
+                      GO TO PROFILE
+                    </button>
+                </li>
+                <li>
+                  <button type="submit" class="btn btn-visit" style="background-color: black;">
+                      REVIEW POST
+                  </button>
+                </li>
+              </ul>
             </div>
-          </div><!-- End Gallery Item -->
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
-              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
-                <div class="row m-0">
-                  <div class="col-12">
-                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
-                  </div>
-                  <div class="col-12 text-end">
-                    <strong>-@username</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
+          </div>
 
         </div>
 
       </div>
-    </section><!-- End Gallery Section -->
+    </section><!-- End Gallery Single Section -->
 
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials mb-4">
       <div class="container">
 
         <div class="section-header">
-          <h2>Testimonials</h2>
+          <h2>REVEWS</h2>
           <p>What they are saying</p>
         </div>
 
@@ -338,7 +323,7 @@ if(!isset($_SESSION['loggedin'])){
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?v=<?php echo time(); ?>"></script>
 
 </body>
 
