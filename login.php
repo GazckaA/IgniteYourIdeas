@@ -1,3 +1,21 @@
+<?php
+
+session_start();
+//si hay sesion activa
+if(isset($_SESSION['loggedin'])){
+    header("Location: index.php");
+    exit();
+}
+//si hay error
+if(isset($_SESSION['error'])){
+    $error = $_SESSION['error'];
+    //alerta
+    echo "<script>alert('$error');</script>";
+    unset($_SESSION['error']);
+}
+
+
+?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -28,7 +46,7 @@
     <link rel="stylesheet" href="assets/css/Login-with-overlay-image.css">
 </head>
 
-<body><div id="main-wrapper" class="container">
+<body><div id="main-wrapper" class="container mb-3">
     <div class="row justify-content-center">
         <div class="col-xl-10">
             <div class="card border-0 my-2 my-lg-0">
@@ -39,13 +57,14 @@
                                 <div class="mb-4">
                                     <h1 class="h4 font-weight-bold text-theme text-center">LOGIN</h1>
                                 </div>
-                                <form >
+                                <form id="login" action="BackEnd/controller.php" method="POST">
+                                    <input type="hidden" name="operation" value="login">
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="Username or email">
-                                        <label for="floatingInput">Username or email</label>
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Username or email">
+                                        <label for="username">Username or email</label>
                                     </div>
                                     <div class="form-floating input-group mb-2">
-                                        <input type="password" class="form-control" id="password" placeholder="Password" autocomplete="off" required>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off" required>
                                         <label for="password">Password</label>
                                         <button class="btn btn-outline-secondary toggle-password" type="button" id="togglePassword" target="#password">
                                             <i class="bi bi-eye"></i>
@@ -53,10 +72,10 @@
                                     </div>
                                     <div class="row m-0">
                                         <div class="col-12">
-                                            <button class="btn btn-primary " data-bss-hover-animate="pulse" id="button1" type="button"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>GO!</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button>
+                                            <button type="submit" form="login" class="btn btn-primary " data-bss-hover-animate="pulse" id="button1"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>GO!</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button>
                                         </div>
                                         <div class="col-12">
-                                            <a href="#l" class="forgot-link float-right text-light m-2">Forgot password?</a>
+                                            <a href="#l" class="forgot-link float-right text-light m-2" style="text-decoration: underline;">Forgot password?</a>
                                         </div>
                                     </div>                                    
                                 </form>
@@ -81,7 +100,7 @@
             </div>
             <!-- end card -->
 
-            <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="register.php" class="text-light ml-1">Sign Up</a></p>
+            <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="register.php" class="text-light ml-1" style="text-decoration: underline;">Sign Up</a></p>
 
             <!-- end row -->
 

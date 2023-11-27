@@ -1,3 +1,20 @@
+<?php
+
+session_start();
+if(isset($_SESSION['loggedin'])){
+    header("Location: index.php");
+    exit();
+}
+
+//si hay error
+if(isset($_SESSION['error'])){
+    $error = $_SESSION['error'];
+    //alerta
+    echo "<script>alert('$error');</script>";
+    unset($_SESSION['error']);
+}
+
+?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -28,7 +45,7 @@
     <link rel="stylesheet" href="assets/css/Login-with-overlay-image.css">
 </head>
 
-<body ><div id="main-wrapper" class="container">
+<body ><div id="main-wrapper" class="container mb-3">
     <div class="row justify-content-center">
         <div class="col-xl-10">
             <div class="card border-0 my-2 my-lg-0">
@@ -50,26 +67,27 @@
                                 <div class="mb-4">
                                     <h1 class="h4 font-weight-bold text-theme text-center">SIGN <br class="d-block d-md-none">UP</h1>
                                 </div>
-                                <form autocomplete="off">
+                                <form autocomplete="off" id="register" action="BackEnd/controller.php" method="POST">
+                                    <input type="hidden" name="operation" value="register">
                                     <div class="form-floating mb-2">
-                                        <input type="text" class="form-control" id="name" placeholder="Name" required>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
                                         <label for="name">Name <b class="req">*</b></label>
                                     </div>
                                     <div class="form-floating mb-2">
-                                        <input type="text" class="form-control" id="last" placeholder="Last name">
+                                        <input type="text" class="form-control" id="last" name="lastname" placeholder="Last name">
                                         <label for="last">Last name</label>
                                     </div>
                                     <div class="form-floating mb-2">
-                                        <input type="text" class="form-control" id="username" placeholder="username" required>
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="username" maxlength="25" required>
                                         <label for="username">Username <b class="req">*</b></label>
                                     </div>
                                     <div class="form-floating mb-2">
-                                        <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
                                         <label for="email">Email address <b class="req">*</b></label>
                                     </div>
                                     <div class="form-floating input-group mb-2">
-                                        <input type="password" class="form-control" id="password" placeholder="Password" autocomplete="off" required>
-                                        <label for="password">Password <b class="req">*</b></label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off" required>
+                                        <label for="password">Password <b class="req">*</b></label>  
                                         <button class="btn btn-outline-secondary toggle-password" type="button" target="#password">
                                             <i class="bi bi-eye"></i>
                                         </button>
@@ -83,7 +101,7 @@
                                     </div>
                                     <div class="row m-0">
                                         <div class="col-12">
-                                            <button class="btn btn-primary " data-bss-hover-animate="pulse" id="button1" type="button"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>READY!</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button>
+                                            <button type="submit" form="register" class="btn btn-primary " data-bss-hover-animate="pulse" id="button1"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>READY!</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button>
                                         </div>
                                     </div>                                    
                                 </form>
@@ -112,6 +130,59 @@
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/passwordToggle.js"></script>
     <script src="assets/js/quote.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#register").submit(function(e){
+                if(!($("#password").hasClass("is-valid") && $("#confirm").hasClass("is-valid"))){
+                    e.preventDefault();
+                    alert("Password is not ready! Make sure it has at least 8 characters and that both passwords match.");
+                    return;
+                }
+            });
+            //on change password
+            $("#password").keyup(function(){
+                //si esta vacio
+                if($("#password").val() == "" && $("#confirm").val() == ""){
+                    $("#password").removeClass("is-valid");
+                    $("#password").removeClass("is-invalid");
+                    $("#confirm").removeClass("is-valid");
+                    $("#confirm").removeClass("is-invalid");
+                    return;
+                }
+                //si no tiene por lo menos 8 caracteres
+                if($("#password").val().length < 8){
+                    $("#password").removeClass("is-valid");
+                    $("#password").addClass("is-invalid");
+                }else{
+                    $("#password").removeClass("is-invalid");
+                    $("#password").addClass("is-valid");
+                }
+                if($("#password").val() != $("#confirm").val()){
+                    $("#confirm").removeClass("is-valid");
+                    $("#confirm").addClass("is-invalid");
+                }else{
+                    $("#confirm").removeClass("is-invalid");
+                    $("#confirm").addClass("is-valid");
+                }
+            });
+            $("#confirm").keyup(function(){ 
+                if($("#password").val() != $("#confirm").val()){
+                    $("#confirm").removeClass("is-valid");
+                    $("#confirm").addClass("is-invalid");
+                }else{
+                    $("#confirm").removeClass("is-invalid");
+                    $("#confirm").addClass("is-valid");
+                }
+                if($("#password").val().length < 8){
+                    $("#password").removeClass("is-valid");
+                    $("#password").addClass("is-invalid");
+                }else{
+                    $("#password").removeClass("is-invalid");
+                    $("#password").addClass("is-valid");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

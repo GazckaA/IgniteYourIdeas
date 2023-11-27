@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+//si hay sesion activa
+if(isset($_SESSION['loggedin'])){
+    header("Location: index.php");
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -1,4 +1,21 @@
-﻿<!DOCTYPE html>
+﻿<?php
+
+session_start();
+//if not loggedin
+if(!isset($_SESSION['loggedin'])){
+    header("Location: landing.php");
+    exit();
+}  
+
+//if logout
+if(isset($_POST['operation']) && $_POST['operation'] == 'logout'){
+    session_destroy();
+    header("Location: landing.php");
+    exit();
+}
+
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -103,9 +120,15 @@
       </div>
       <div class="blog-slider__pagination"></div>
     </div>
-
   </section><!-- End Hero Section -->
-
+  <!-- ======= Boton de cerrar sesion ======= -->
+  <form action="index.php" method="post">
+      <input type="hidden" name="operation" value="logout">
+      <button type="submit" class="btn btn-light my-2 my-sm-0">
+          Close session
+      </button>
+  </form>
+  <!-- ======= Main ======= -->
   <main id="main" class="mb-4" data-aos="fade" data-aos-delay="1500" >
 
     <!-- ======= Gallery Section ======= -->
