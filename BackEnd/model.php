@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 
 
@@ -68,7 +68,7 @@ class User{
         // Consulta preparada
         $stmt = $mysqli->prepare("INSERT INTO users (name, lastname, username, email, password) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $sanitizedName, $sanitizedLastname, $sanitizedUsername, $sanitizedEmail, $sanitizedPassword);
-        $stmt->execute()
+        $stmt->execute();
         $result = $stmt->get_result();
 
         // Verificar si se encontraron resultados
