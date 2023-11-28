@@ -38,7 +38,7 @@ if(!isset($_SESSION['loggedin'])){
   <link href="assets/css/main.css" rel="stylesheet">
 
   <!-- TextEditor -->
-  <link rel="stylesheet" href="assets/css/texteditor.css">
+  <link rel="stylesheet" href="assets/css/textEditor.css">
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
   <!-- =======================================================
