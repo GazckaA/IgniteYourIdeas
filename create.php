@@ -15,7 +15,7 @@ if(!isset($_SESSION['loggedin'])){
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Create</title>
+  <title>Title</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -36,6 +36,10 @@ if(!isset($_SESSION['loggedin'])){
 
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- TextEditor -->
+  <link rel="stylesheet" href="assets/css/texteditor.css">
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
   <!-- =======================================================
   * Template Name: PhotoFolio
@@ -119,7 +123,7 @@ if(!isset($_SESSION['loggedin'])){
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>Title</h2>
+            <h2 id="title">Title</h2>
 
             <a class="cta-btn rounded-pill" id="save">Save</a>
 
@@ -144,28 +148,76 @@ if(!isset($_SESSION['loggedin'])){
           </div>
 
         </div>
-
         <div class="row justify-content-between gy-4 mt-4">
 
           <div class="col-lg-8">
             <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
-              <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
-              <p>
-                Amet consequatur qui dolore veniam voluptatem voluptatem sit. Non aspernatur atque natus ut cum nam et. Praesentium error dolores rerum minus sequi quia veritatis eum. Eos et doloribus doloremque nesciunt molestiae laboriosam.
-              </p>
+              
+            <div class="container p-0 my-2" >
+                  <div class="toolbar rounded-top" >
+                      <div class="head">
+                          <input type="text" placeholder="Filename" value="Title" id="filename" maxlength="155" >
+                          <select onchange="formatDoc('formatBlock', this.value); this.selectedIndex=0;">
+                              <option value="" selected="" hidden="" disabled="">Format</option>
+                              <option value="h1">Heading 1</option>
+                              <option value="h2">Heading 2</option>
+                              <option value="h3">Heading 3</option>
+                              <option value="h4">Heading 4</option>
+                              <option value="h5">Heading 5</option>
+                              <option value="h6">Heading 6</option>
+                              <option value="p">Paragraph</option>
+                          </select>
+                          <select onchange="formatDoc('fontSize', this.value); this.selectedIndex=0;">
+                              <option value="" selected="" hidden="" disabled="">Font size</option>
+                              <option value="1">Extra small</option>
+                              <option value="2">Small</option>
+                              <option value="3">Regular</option>
+                              <option value="4">Medium</option>
+                              <option value="5">Large</option>
+                              <option value="6">Extra Large</option>
+                              <option value="7">Big</option>
+                          </select>
+                          <div class="color">
+                              <span style="color: black;">Color</span>
+                              <input type="color" oninput="formatDoc('foreColor', this.value); this.value='#000000';">
+                          </div>
+                          <div class="color">
+                              <span style="color: black;">Background</span>
+                              <input type="color" oninput="formatDoc('hiliteColor', this.value); this.value='#000000';">
+                          </div>
+                          <div class="color" style="background: #5bd9a9;border: black;">
+                              <span style="color: black;" data-bs-toggle="modal">Save</span>
+                          </div>
+                          <div class="color" style="background: red;border: black;">
+                              <span style="color: white;" data-bs-toggle="modal">Delete</span>
+                          </div>
+                      </div>
+                      <div class="btn-toolbar">
+                          <button onclick="formatDoc('undo')"><i class='bx bx-undo' ></i></button>
+                          <button onclick="formatDoc('redo')"><i class='bx bx-redo' ></i></button>
+                          <button onclick="formatDoc('bold')"><i class='bx bx-bold'></i></button>
+                          <button onclick="formatDoc('underline')"><i class='bx bx-underline' ></i></button>
+                          <button onclick="formatDoc('italic')"><i class='bx bx-italic' ></i></button>
+                          <button onclick="formatDoc('strikeThrough')"><i class='bx bx-strikethrough' ></i></button>
+                          <button onclick="formatDoc('justifyLeft')"><i class='bx bx-align-left' ></i></button>
+                          <button onclick="formatDoc('justifyCenter')"><i class='bx bx-align-middle' ></i></button>
+                          <button onclick="formatDoc('justifyRight')"><i class='bx bx-align-right' ></i></button>
+                          <button onclick="formatDoc('justifyFull')"><i class='bx bx-align-justify' ></i></button>
+                          <button onclick="formatDoc('insertOrderedList')"><i class='bx bx-list-ol' ></i></button>
+                          <button onclick="formatDoc('insertUnorderedList')"><i class='bx bx-list-ul' ></i></button>
+                          <button onclick="addLink()"><i class='bx bx-link' ></i></button>
+                          <button onclick="formatDoc('unlink')"><i class='bx bx-unlink' ></i></button>
+                          <button onclick="addImage()"><i class='bx bx-images' ></i></button>
+                          <button id="show-code" data-active="false">&lt;/&gt;</button>
+                      </div>
+                  </div>
+                  <div id="content" contenteditable="true" spellcheck="false" >
+                      Lorem, ipsum.
+                  </div>
+              </div>
 
-              <p>
-                Impedit ipsum quae et aliquid doloribus et voluptatem quasi. Perspiciatis occaecati earum et magnam animi. Quibusdam non qui ea vitae suscipit vitae sunt. Repudiandae incidunt cumque minus deserunt assumenda tempore. Delectus voluptas necessitatibus est.
-
-              <p>
-                Sunt voluptatum sapiente facilis quo odio aut ipsum repellat debitis. Molestiae et autem libero. Explicabo et quod necessitatibus similique quis dolor eum. Numquam eaque praesentium rem et qui nesciunt.
-              </p>
-
+              </div>
             </div>
-          </div>
 
           <div class="col-lg-3">
             <div class="portfolio-info">
@@ -173,17 +225,17 @@ if(!isset($_SESSION['loggedin'])){
               <ul>
                 <li><strong>Name:</strong> <span>Ian</span></li>
                 <li><strong>Post date:</strong> <span>01 March, 2022</span></li>
-                <li><strong>Username:</strong> <a href="#">@user</a></li>
+                <li><strong>Username:</strong> @user</li>
                 <li >
                   <form action="profile.php" method="get" id="gotoprofile">
                     <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
                   </form>
-                  <button class="btn btn-visit" type="submit" form="gotoprofile">
+                  <button class="btn btn-visit" type="submit" form="gotoprofile" disabled>
                       GO TO PROFILE
                     </button>
                 </li>
                 <li>
-                  <button type="submit" class="btn btn-visit" style="background-color: black;">
+                  <button type="submit" class="btn btn-visit" style="background-color: black;" disabled>
                       REVIEW POST
                   </button>
                 </li>
@@ -201,7 +253,7 @@ if(!isset($_SESSION['loggedin'])){
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+  <footer id="footer" class="footer d-none">
     <div class="container">
       <div class="copyright">
         &copy; Copyright <strong><span>PhotoFolio</span></strong>. All Rights Reserved
@@ -228,17 +280,13 @@ if(!isset($_SESSION['loggedin'])){
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/jquery.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js?v=<?php echo time(); ?>"></script>
 
-  <script>
-    $(document).ready(function() {
-      //when save button is pressed
-
-    });
-  </script>
-
+  <!-- TextEditor -->
+  <script src="assets/js/texteditor.js?v=<?php echo time(); ?>"></script>
 </body>
 
 </html>
