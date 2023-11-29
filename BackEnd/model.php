@@ -40,15 +40,11 @@ class User{
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $sanitizedUsername;
             header("Location: ../index.php"); // Redirigir a la página de bienvenida o a donde desees
-            $stmt->close();
-            $mysqli->close();
             exit();
         } else {
             // Usuario no autenticado, mostrar mensaje de error
             $_SESSION['error'] = "Incorrect username or password.";
             header("Location: ../login.php"); // Redirigir de nuevo al formulario de inicio de sesión
-            $stmt->close();
-            $mysqli->close();
             exit();
         }
     }
@@ -123,7 +119,6 @@ class User{
         }
         $stmt->bind_result($name, $email);
         $stmt->fetch();
-        $stmt->store_result();
         $stmt->close();
 
         // Verifica si se encontró un usuario
@@ -179,7 +174,6 @@ class User{
         $stmt->execute();
         $stmt->bind_result($name);
         $stmt->fetch();
-        $stmt->store_result();
         $stmt->close();
 
         // Verifica si se encontró un usuario
