@@ -55,6 +55,8 @@
             //update token to null
             $stmt = $mysqli->prepare("UPDATE users SET token = NULL WHERE token = ?");
             $stmt->bind_param("s", $sanitizedToken);
+            $stmt->execute();
+            $stmt->close();
         } else {
             // Usuario no registrado, mostrar mensaje de error
             $_SESSION['error'] = "Invalid token!";
