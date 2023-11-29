@@ -46,8 +46,10 @@ else{
             </div>
           </div>';
         }
-        else if($description == NULL || $birthdate == NULL){
+        else if(($description == NULL || $birthdate == NULL) && !isset($_SESSION['showMessage'])){
             echo '<script>alert("Welcome '.$name.'! We dont have some of your info. Please complete in your profile.");</script>';
+            //guardar en sesion que ya se mostro el mensaje
+            $_SESSION['showMessage'] = true;
         }
     } else {
         // Usuario no registrado, mostrar mensaje de error
