@@ -14,7 +14,20 @@
             case 'register':
                 $user->register($name, $lastname, $username, $email, $password);
                 break;
+            case 'sendResetEmail':
+                $user->sendResetEmail($username);
+                break;
+            case 'resendVerifyEmail':
+                $user->resendVerifyEmail($email);
+                break;
+            case 'resetPass':
+                $user->resetPass($username, $password);
+                break;
+            case 'changePass':
+                $user->changePass($username, $password, $newPassword);
+                break;
         }
     }
 
+    header("Location: ../index.php");
 ?>

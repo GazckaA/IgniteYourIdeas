@@ -1,34 +1,10 @@
-<?php
-
-session_start();
-if(!isset($_SESSION['loggedin'])){
-    header("Location: landing.php");
-    exit();
-} 
-
-//if logout
-if(isset($_POST['operation']) && $_POST['operation'] == 'logout'){
-    session_destroy();
-    header("Location: requestEmail.php");
-    exit();
-}
-
-//si hay error
-if(isset($_SESSION['error'])){
-    $error = $_SESSION['error'];
-    //alerta
-    echo "<script>alert('$error');</script>";
-    unset($_SESSION['error']);
-}
-
-?>
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Change Password</title>
+    <title>Reset Password</title>
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
@@ -52,7 +28,54 @@ if(isset($_SESSION['error'])){
     <link rel="stylesheet" href="assets/css/Login-with-overlay-image.css">
 </head>
 
-<body ><div id="main-wrapper" class="container mb-3">
+<body >
+<?php
+    session_start();
+
+    //if get is set
+    if(isset($_GET) && isset($_GET['token']) && $_GET['token'] != ""){
+        //conexion a db
+        include 'BackEnd/db.php';
+
+        // Sanitizar los datos
+        $sanitizedToken = mysqli_real_escape_string($mysqli, $_GET['token']);
+
+        // Consulta preparada
+        $stmt = $mysqli->prepare("SELECT username FROM users WHERE token = ?");
+        $stmt->bind_param("s", $sanitizedToken);
+        $stmt->execute();
+        $stmt->bind_result($username);
+        $stmt->fetch();
+        $stmt->close();
+
+        // Verificar si se encontraron resultados
+        if (isset($username)) {
+            // Usuario registrado con éxito
+
+            //update token to null
+            $stmt = $mysqli->prepare("UPDATE users SET token = NULL WHERE token = ?");
+            $stmt->bind_param("s", $sanitizedToken);
+            $stmt->execute();
+            $mysqli->close();
+        } else {
+            // Usuario no registrado, mostrar mensaje de error
+            $_SESSION['error'] = "Invalid token!";
+            header("Location: login.php"); // Redirigir de nuevo al formulario de registro
+            $stmt->close();
+            $mysqli->close();
+            exit();
+        }
+    }else{
+        // Usuario no registrado, mostrar mensaje de error
+        $_SESSION['error'] = "Not allowed there!";
+        header("Location: login.php"); // Redirigir de nuevo al formulario de registro
+        $stmt->close();
+        $mysqli->close();
+        exit();
+    }
+
+?>    
+<div id="main-wrapper" class="container mb-3">
     <div class="row justify-content-center">
         <div class="col-xl-10">
             <div class="card border-0 my-2 my-lg-0">
@@ -72,20 +95,13 @@ if(isset($_SESSION['error'])){
                         <div class="col-lg-6">
                             <div class="p-1 p-lg-5">
                                 <div class="mb-4">
-                                    <h1 class="h4 font-weight-bold text-theme text-center">CHANGE <br class="d-block d-md-none">PASSWORD</h1>
+                                    <h1 class="h4 font-weight-bold text-theme text-center">RESET <br class="d-block d-md-none">PASSWORD</h1>
                                 </div>
                                 <form autocomplete="off" id="register" action="BackEnd/controller.php" method="POST">
-                                    <input type="hidden" name="operation" value="changePass">
-                                    <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
+                                    <input type="hidden" name="operation" value="resetPass">
+                                    <input type="hidden" name="username" value="<?php echo $username ?>">
                                     <div class="form-floating input-group mb-2">
-                                        <input type="password" class="form-control" id="last" name="password" placeholder="Password" autocomplete="off" required>
-                                        <label for="last">Password <b class="req">*</b></label>  
-                                        <button class="btn btn-outline-secondary toggle-password" type="button" target="#last">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                    </div>
-                                    <div class="form-floating input-group mb-2">
-                                        <input type="password" class="form-control" id="password" name="newPassword" placeholder="Password" autocomplete="off" required>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off" required>
                                         <label for="password">New password <b class="req">*</b></label>  
                                         <button class="btn btn-outline-secondary toggle-password" type="button" target="#password">
                                             <i class="bi bi-eye"></i>
@@ -100,13 +116,9 @@ if(isset($_SESSION['error'])){
                                     </div>
                                     <div class="row m-0">
                                         <div class="col-12 mb-2">
-                                            <button type="submit" form="register" class="btn btn-primary " data-bss-hover-animate="pulse" id="button1"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>CHANGE!</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button>
+                                            <button type="submit" form="register" class="btn btn-primary " data-bss-hover-animate="pulse" id="button1"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>RESET!</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button>
                                         </div>
                                         <div class="col-12">
-                                            <a class="btn btn-link " href="index.php"><span><strong>GO BACK!</strong></span></a>
-                                        </div>
-                                        <div class="col-12">
-                                            <a href="javascript:{}" onclick="document.getElementById('logout').submit();" class="forgot-link float-right text-light m-2" style="text-decoration: underline;">Forgot password?</a>
                                         </div>
                                     </div>                                    
                                 </form>
@@ -126,9 +138,6 @@ if(isset($_SESSION['error'])){
     </div>
     <!-- Row -->
 </div>
-<form id="logout" action="changePassword.php" method="post">
-<input type="hidden" name="operation" value="logout">
-</form>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>

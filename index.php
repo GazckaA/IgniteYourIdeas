@@ -1,11 +1,5 @@
 ﻿<?php
-
 session_start();
-//if not loggedin
-if(!isset($_SESSION['loggedin'])){
-    header("Location: landing.php");
-    exit();
-}  
 
 //if logout
 if(isset($_POST['operation']) && $_POST['operation'] == 'logout'){
@@ -13,6 +7,15 @@ if(isset($_POST['operation']) && $_POST['operation'] == 'logout'){
     header("Location: landing.php");
     exit();
 }
+
+//si hay error
+if(isset($_SESSION['error'])){
+  $error = $_SESSION['error'];
+  //alerta
+  echo "<script>alert('$error');</script>";
+  unset($_SESSION['error']);
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -23,8 +26,6 @@ if(isset($_POST['operation']) && $_POST['operation'] == 'logout'){
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>Home</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
 
   <!-- Favicons -->
   <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
@@ -57,6 +58,7 @@ if(isset($_POST['operation']) && $_POST['operation'] == 'logout'){
 </head>
 
 <body style="background-image: url(assets/img/i2.jpg);">
+    <?php include 'BackEnd/getone.php'; ?>
 
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">

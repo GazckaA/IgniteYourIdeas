@@ -25,7 +25,6 @@ if(isset($_SESSION['loggedin'])){
     <link rel="stylesheet" href="assets/css/Landing-Page---Parallax-Background---Logo-Heading-ButtonGIF.css">
 </head>
 <body >
-
     <div>
         <div id="box-2" ><img data-aos="fade" data-aos-duration="2500" data-aos-delay="700" id="logoimage1" src="assets/img/Drills4You%20logo%20fini.png">
             <h1 data-aos="fade" data-aos-duration="2000" data-aos-delay="700" id="heading1" >WORDS THAT CONNECT, <br class="d-block d-md-none">IDEAS THAT IGNITE</h1>

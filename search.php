@@ -1,11 +1,6 @@
 ﻿<?php
 
 session_start();
-//if not loggedin
-if(!isset($_SESSION['loggedin'])){
-    header("Location: landing.php");
-    exit();
-}  
 
 ?>
 <!DOCTYPE html>
@@ -47,7 +42,7 @@ if(!isset($_SESSION['loggedin'])){
 </head>
 
 <body style="background-image: url(assets/img/i2.jpg);">
-
+<?php include 'BackEnd/getone.php';  ?>
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -63,6 +58,14 @@ if(!isset($_SESSION['loggedin'])){
           <li><a href="create.php" class="me-0 me-lg-2">Create</a></li>
           <li class="dropdown active d-xxl-none me-0 me-lg-2"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
+              <li>
+                <form action="profile.php" method="get">
+                  <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
+                  <button class="btn btn-link mx-2" type="submit">
+                    MY PROFILE
+                  </button>
+                </form>
+              </li>
               <li>
                 <form action="index.php" method="post">
                     <input type="hidden" name="operation" value="logout">
@@ -82,6 +85,12 @@ if(!isset($_SESSION['loggedin'])){
           <li class="nav-item dropdown d-none d-xxl-block">
             <a class="nav-link dropdown-toggle me-0 me-lg-2 active" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle dropdown-indicator"></i></a>
                 <div class="dropdown-menu dropdown-menu-end">
+                  <form action="profile.php" method="get">
+                    <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
+                    <button class="btn btn-link mx-2" type="submit">
+                      MY PROFILE
+                    </button>
+                  </form>
                   <form action="index.php" method="post">
                     <input type="hidden" name="operation" value="logout">
                     <button type="submit" class="btn btn-link mx-2">

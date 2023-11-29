@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 session_start();
 //si hay sesion activa
@@ -22,7 +22,7 @@ if(isset($_SESSION['error'])){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>LogIn</title>
+    <title>Reset Password</title>
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
@@ -55,27 +55,17 @@ if(isset($_SESSION['error'])){
                         <div class="col-lg-6">
                             <div class="p-1 p-lg-5">
                                 <div class="mb-4">
-                                    <h1 class="h4 font-weight-bold text-theme text-center">LOGIN</h1>
+                                    <h1 class="h4 font-weight-bold text-theme text-center">RESET PASSWORD</h1>
                                 </div>
                                 <form id="login" action="BackEnd/controller.php" method="POST">
-                                    <input type="hidden" name="operation" value="login">
+                                    <input type="hidden" name="operation" value="sendResetEmail">
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" id="username" name="username" placeholder="Username or email" required>
                                         <label for="username">Username or email</label>
                                     </div>
-                                    <div class="form-floating input-group mb-2">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off" required>
-                                        <label for="password">Password</label>
-                                        <button class="btn btn-outline-secondary toggle-password" type="button" id="togglePassword" target="#password">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                    </div>
                                     <div class="row m-0">
                                         <div class="col-12">
                                             <button type="submit" form="login" class="btn btn-primary " data-bss-hover-animate="pulse" id="button1"><img style="width: 20px;height: 20px;transform: rotate(270deg) translateX(2px);" src="assets/img/arrowwhite.gif"><span><strong>GO!</strong></span><img style="width: 20px;height: 20px;transform: rotate(90deg) translateX(-2px);" src="assets/img/arrowwhite.gif"></button>
-                                        </div>
-                                        <div class="col-12">
-                                            <a href="requestEmail.php" class="forgot-link float-right text-light m-2" style="text-decoration: underline;">Forgot password?</a>
                                         </div>
                                     </div>                                    
                                 </form>
@@ -99,9 +89,6 @@ if(isset($_SESSION['error'])){
                 <!-- end card-body -->
             </div>
             <!-- end card -->
-
-            <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="register.php" class="text-light ml-1" style="text-decoration: underline;">Sign Up</a></p>
-
             <!-- end row -->
 
         </div>

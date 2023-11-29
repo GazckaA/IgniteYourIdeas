@@ -1,11 +1,6 @@
 ﻿<?php
 
 session_start();
-//if not loggedin
-if(!isset($_SESSION['loggedin'])){
-    header("Location: landing.php");
-    exit();
-}  
 
 ?>
 <!DOCTYPE html>
@@ -51,7 +46,7 @@ if(!isset($_SESSION['loggedin'])){
 </head>
 
 <body style="background-image: url(assets/img/i2.jpg);">
-
+<?php include 'BackEnd/getone.php';  ?>
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid d-flex align-items-center justify-content-between">
