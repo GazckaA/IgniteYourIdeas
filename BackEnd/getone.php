@@ -53,6 +53,7 @@ else{
         }
     } else {
         // Usuario no registrado, mostrar mensaje de error
+        session_destroy();
         header("Location: landing.php"); // Redirigir landing
         exit();
     }
