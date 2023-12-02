@@ -10,7 +10,7 @@ session_start();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Title</title>
+  <title><?php include 'BackEnd/getPost.php'; if(isset($title))echo $title; else echo "Title" ?></title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -118,9 +118,9 @@ session_start();
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2 id="title">Title</h2>
+            <h2 id="title"><?php if(isset($title))echo $title; else echo "Title" ?></h2>
 
-            <a class="cta-btn rounded-pill" onclick="save()" id="save">Save</a>
+            <a class="cta-btn rounded-pill" onclick="<?php if(isset($id))echo 'update()'; else echo 'save()'?>" >Save</a>
 
           </div>
         </div>
@@ -139,7 +139,7 @@ session_start();
 
                 <div class="gallery">
                   <div class="gallery-item h-100">
-                  <img src="assets/img/gallery/gallery-2.jpg?v=<?php echo time(); ?>" class="img-fluid" alt="" id="portada">
+                  <img src="<?php if(isset($image))echo $image; else echo 'assets/img/gallery/gallery-2.jpg?v='.time();?>" class="img-fluid" alt="" id="portada">
                   <div class="gallery-links d-flex align-items-center justify-content-center">
                     <a onclick="addMainImgLink()" class="details-link" ><i class="bi bi-link"></i></a>
                     <a class="details-link" data-bs-toggle="dropdown" ><i class="bi bi-upload"></i></a>
@@ -166,8 +166,8 @@ session_start();
             <div class="container p-0 my-2" >
                   <div class="toolbar rounded-top" >
                       <div class="head">
-                          <input type="text" placeholder="Filename" value="Title" id="filename" maxlength="155" >
-                          <input type="text" placeholder="Tags" value="Tags" id="tags" maxlength="155" >
+                          <input type="text" placeholder="Filename" value="<?php if(isset($title))echo $title; else echo 'Title'?>" id="filename" maxlength="155" >
+                          <input type="text" placeholder="Tags" value="<?php if(isset($tags))echo $tags; else echo 'Tags'?>" id="tags" maxlength="155" >
                           <select onchange="formatDoc('formatBlock', this.value); this.selectedIndex=0;">
                               <option value="" selected="" hidden="" disabled="">Format</option>
                               <option value="h1">Heading 1</option>
@@ -196,8 +196,8 @@ session_start();
                               <span style="color: black;">Background</span>
                               <input type="color" oninput="formatDoc('hiliteColor', this.value); this.value='#000000';">
                           </div>
-                          <div class="color" style="background: #5bd9a9;border: black;" onclick="save()">
-                              <span style="color: black;" id="save">Save</span>
+                          <div class="color" style="background: #5bd9a9;border: black;" onclick="<?php if(isset($id))echo 'update()'; else echo 'save()'?>">
+                              <span style="color: black;" >Save</span>
                           </div>
                           <div class="color" style="background: red;border: black;" onclick="delete()">
                               <span style="color: white;" data-bs-toggle="modal">Delete</span>
@@ -227,7 +227,7 @@ session_start();
                       </div>
                   </div>
                   <div id="content" contenteditable="true" spellcheck="false" >
-                      Lorem, ipsum.
+                      <?php if(isset($content))echo $content; else echo 'Lorem, ipsum.'?>
                   </div>
               </div>
 
@@ -238,9 +238,9 @@ session_start();
             <div class="portfolio-info">
               <h3>Author information:</h3>
               <ul>
-                <li><strong>Name:</strong> <span id="name"><?php echo $name?></span></li>
+                <li><strong>Name:</strong> <span id="name"><?php if(isset($authorName))echo $authorName; else echo $name;?></span></li>
                 <li><strong>Post date:</strong> <span id="postdate"></span></li>
-                <li><strong>Username:</strong> <span id="author"><?php echo $username?></span></li>
+                <li><strong>Username:</strong> <span id="author"><?php if(isset($author))echo $author; else echo $username?></span></li>
                 <li >
                   <form action="profile.php" method="get" id="gotoprofile">
                     <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">

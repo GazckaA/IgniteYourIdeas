@@ -11,7 +11,7 @@ session_start();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Profile</title>
+  <title><?php include 'BackEnd/getProfile.php'; echo '@'.$pusername;?></title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -43,7 +43,7 @@ session_start();
 </head>
 
 <body style="background-image: url(assets/img/i2.jpg);">
-<?php include 'BackEnd/getone.php';  ?>
+<?php include 'BackEnd/getone.php'; ?>
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -101,10 +101,10 @@ session_start();
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>@User</h2>
-            <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
+            <h2>@<?php echo $pusername?></h2>
+            <p><?php echo $pdescription;?></p>
 
-            <a class="cta-btn" href="">Edit Profile</a>
+            <a class="cta-btn" href="editProfile.php?username=<?php echo $pusername?>"><?php if($pdescription == null || $pbirthdate == null || $plastname == null)echo 'COMPLETE PROFILE'; else echo 'EDIT PROFILE';?></a>
 
           </div>
         </div>
@@ -117,25 +117,24 @@ session_start();
 
         <div class="row gy-4 justify-content-center">
           <div class="col-lg-4">
-            <img src="https://learnenglish.britishcouncil.org/sites/podcasts/files/2021-10/RS6715_492969113-hig.jpg" class="img-fluid rounded" alt="">
+            <img src="<?php if(isset($image))echo $image; else echo 'assets/img/gallery/user.jpg';?>" class="img-fluid rounded" alt="">
           </div>
           <div class="col-lg-5 content">
             <h2>More about me:</h2>
             <div class="row">
               <div class="col-lg-6">
                 <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Name:</strong> <span>Ian</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Last Name:</strong> <span>Gazcka</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>1 May 1995</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>30</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Name:</strong> <?php echo $pname ?></li>
+                  <?php if($plastname != null)echo '<li><i class="bi bi-chevron-right"></i> <strong>Last Name:</strong> '.$plastname.'</li>' ?> 
+                  <?php if($pbirthdate != null)echo '<li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong>'.$pbirthdate.'</li><li><i class="bi bi-chevron-right"></i> <strong>Age:</strong>'. getAge($pbirthdate).'</li>';?>
                 </ul>
               </div>
               <div class="col-lg-6">
                 <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>email@example.com</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Role:</strong> <span>Reader</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Posts:</strong> <span>3</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Since:</strong> <span>2023-nov-27</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <?php echo $pemail?></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Role:</strong> <?php echo $prole?></li>
+                  <?php if($prole != 'reader')'<li><i class="bi bi-chevron-right"></i> <strong>Posts:</strong> ' .$pposts . '</li>'?>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Since:</strong> <?php echo $pcreatedat?> (UTC+00:00)</li>
                 </ul>
               </div>
             </div>

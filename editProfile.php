@@ -2,6 +2,7 @@
 
 session_start();
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,7 @@ session_start();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Connect</title>
+  <title><?php include 'BackEnd/getProfile.php'; echo '@'.$pusername;?></title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -32,9 +33,6 @@ session_start();
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  <!--Resopnsive card-->
-  <link rel="stylesheet" href="assets/css/responsive-blog-card-slider.css">
-
   <!-- =======================================================
   * Template Name: PhotoFolio
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -45,7 +43,7 @@ session_start();
 </head>
 
 <body style="background-image: url(assets/img/i2.jpg);">
-<?php include 'BackEnd/getone.php';  ?>
+<?php include 'BackEnd/getone.php'; ?>
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -56,24 +54,16 @@ session_start();
 
       <nav id="navbar" class="navbar me-1">
         <ul>
-          <li><a href="index.php" >Contemplate</a></li>
-          <li><a class="active">Connect</a></li>
+          <li><a href="index.php">Contemplate</a></li>
+          <li><a href="connect.php">Connect</a></li>
           <li><a href="create.php" class="me-0 me-lg-2">Create</a></li>
-          <li class="dropdown d-xxl-none me-0 me-lg-2"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown active d-xxl-none me-0 me-lg-2"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li>
-                <form action="profile.php" method="get">
-                    <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
-                    <button class="btn btn-link mx-2" type="submit">
-                      MY PROFILE
-                    </button>
-                  </form>
-              </li>
               <li>
                 <form action="index.php" method="post">
                     <input type="hidden" name="operation" value="logout">
                     <button type="submit" class="btn btn-link mx-2">
-                        CLOSE SESSSION
+                        CLOSE SESSION
                     </button>
                   </form>
               </li>
@@ -86,14 +76,8 @@ session_start();
                 </button>
             </form></li>
           <li class="nav-item dropdown d-none d-xxl-block">
-            <a class="nav-link dropdown-toggle me-0 me-lg-2" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle dropdown-indicator"></i></a>
-                <div class="dropdown-menu dropdown-menu-end" data-popper-placement="bottom-start">
-                  <form action="profile.php" method="get">
-                    <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
-                    <button class="btn btn-link mx-2" type="submit">
-                      MY PROFILE
-                    </button>
-                  </form>
+            <a class="nav-link dropdown-toggle me-0 me-lg-2 active" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle dropdown-indicator"></i></a>
+                <div class="dropdown-menu dropdown-menu-end">
                   <form action="index.php" method="post">
                     <input type="hidden" name="operation" value="logout">
                     <button type="submit" class="btn btn-link mx-2">
@@ -109,44 +93,68 @@ session_start();
 
     </div>
   </header><!-- End Header -->
-  
-  <!-- ======= Main ======= -->
-  <main id="main" class="mb-4" data-aos="fade" data-aos-delay="1500" >
+
+  <main id="main" data-aos="fade" data-aos-delay="1500">
 
     <!-- ======= End Page Header ======= -->
     <div class="page-header d-flex align-items-center">
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>CONNECT</h2>
+            <h2>@<?php echo $pusername?></h2>
+
+            <a class="cta-btn" >SAVE</a>
 
           </div>
         </div>
       </div>
     </div><!-- End Page Header -->
 
-    <!-- ======= Gallery Section ======= -->
-    <section id="gallery" class="gallery">
-      <div class="container-fluid">
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
 
         <div class="row gy-4 justify-content-center">
-          <div class="col-xl-2 col-lg-3 col-md-4">
-            <div class="gallery-item h-100 rounded-circle" style="aspect-ratio: 1 / 1; ">
-              <img src="assets/img/gallery/user.jpg" class="img-fluid" alt="" style="height: 100%; object-fit: cover">
-              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
-                <div class="row m-0">
-                  <div class="col-12">
-                    <a href=""><h3><strong>@username</strong></h3></a>
-                  </div>
+          <div class="col-lg-4">
+            
+            <div class="gallery">
+              <div class="gallery-item">
+                <img src="<?php if(isset($image))echo $image; else echo 'assets/img/gallery/user.jpg';?>" class="img-fluid" alt="" id="portada">
+                <div class="gallery-links d-flex align-items-center justify-content-center">
+                  <a onclick="addMainImgLink()" class="details-link" ><i class="bi bi-link"></i></a>
+                  <a class="details-link" data-bs-toggle="dropdown" ><i class="bi bi-upload"></i></a>
+                  <a class="dropdown-menu dropdown-menu-end">
+                    <input type="file" id="inputArchivo" onchange="uploadMainImg()" accept="image/*" class="m-1">
+                  </a>
                 </div>
               </div>
             </div>
-          </div><!-- End Gallery Item -->
 
+          </div>
+          <div class="col-lg-5 content">
+            <h2>More about me:</h2>
+            <div class="row">
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Name:</strong> <input type="text" class="form-control form-control-sm" placeholder="<?php echo $pname ?>"> </li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Last Name:</strong> <input type="text" class="form-control form-control-sm" placeholder="<?php echo $plastname ?>"> </li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <input type="date" class="form-control form-control-sm" placeholder="<?php echo $pbirthdate ?>"> </li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Username:</strong> <input type="text" class="form-control form-control-sm" placeholder="<?php echo $pusername ?>"> </li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul style="height: 100%;">
+                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <input type="email" class="form-control form-control-sm" placeholder="<?php echo $pemail ?>"> </li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Description:</strong> </li>
+                  <li style="height: 50%;"><textarea class="form-control form-control-sm"placeholder="<?php echo $pdescription ?>" style="height: 100%;"></textarea></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
-    </section><!-- End Gallery Section -->
+    </section><!-- End About Section -->
 
   </main><!-- End #main -->
 
@@ -178,17 +186,34 @@ session_start();
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/jquery.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  <!--Resopnsive card-->
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/responsive-blog-card-slider-01-swiper-bundle.min.js"></script>
-  <script src="assets/js/responsive-blog-card-slider-02-responsive-blog-card-slider.js"></script>
+  <script>
+    function addMainImgLink() {
+        const url = prompt('Insert url');
+        if(url === null) return;
+        $('#portada').attr('src', url);
+        //clear input file
+        $('#inputArchivo').val('');
+    }
 
-  <!--Button-->
-  <script src="assets/js/bs-init.js"></script>
+    function uploadMainImg() {
+        var inputArchivo = document.getElementById('inputArchivo');
+        var vistaPrevia = document.getElementById('portada');
+        if (inputArchivo.files && inputArchivo.files[0]) {
+            var lector = new FileReader();
+            lector.onload = function (e) {
+                vistaPrevia.src = e.target.result;
+            };
+            lector.readAsDataURL(inputArchivo.files[0]);
+        }
+        //clear input file
+        $('#inputArchivo').val('');
+    }
+  </script>
 
 </body>
 
