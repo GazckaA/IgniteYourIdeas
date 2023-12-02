@@ -26,6 +26,9 @@
             case 'changePass':
                 $user->changePass($username, $password, $newPassword);
                 break;
+            case 'save':
+                $user->save($title, $author, $tags, $date, $image, $content, $authorName);
+                break;
         }
     }
 

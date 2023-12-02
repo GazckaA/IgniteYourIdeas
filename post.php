@@ -2,7 +2,6 @@
 
 session_start();
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +10,7 @@ session_start();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Post</title>
+  <title><?php include 'BackEnd/getPost.php'; if(isset($title))echo $title; else echo "Nothing to see here"?></title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -116,9 +115,9 @@ session_start();
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>Title</h2>
+            <h2><?php if(isset($title))echo $title; else echo "<script>alert('Nothing to see here');window.location.href = 'index.php';</script>"?></h2>
 
-            <a class="cta-btn rounded-pill" href="create.html">Edit post</a>
+            <?php if(isset($author)&& isset($username) && $author == $username) echo '<a class="cta-btn rounded-pill" href="create.php?id='.$id.'">Edit post</a>'?>
 
           </div>
         </div>
@@ -134,7 +133,7 @@ session_start();
             <div class="swiper-wrapper align-items-center">
 
               <div class="swiper-slide">
-                <img src="assets/img/gallery/gallery-8.jpg" alt="" class="rounded">
+                <img src="<?php if(isset($image))echo $image;else echo 'assets/img/gallery/gallery-2.jpg'?>" alt="" class="rounded">
               </div>
 
             </div>
@@ -146,21 +145,7 @@ session_start();
 
           <div class="col-lg-8">
             <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
-              <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
-              <p>
-                Amet consequatur qui dolore veniam voluptatem voluptatem sit. Non aspernatur atque natus ut cum nam et. Praesentium error dolores rerum minus sequi quia veritatis eum. Eos et doloribus doloremque nesciunt molestiae laboriosam.
-              </p>
-
-              <p>
-                Impedit ipsum quae et aliquid doloribus et voluptatem quasi. Perspiciatis occaecati earum et magnam animi. Quibusdam non qui ea vitae suscipit vitae sunt. Repudiandae incidunt cumque minus deserunt assumenda tempore. Delectus voluptas necessitatibus est.
-
-              <p>
-                Sunt voluptatum sapiente facilis quo odio aut ipsum repellat debitis. Molestiae et autem libero. Explicabo et quod necessitatibus similique quis dolor eum. Numquam eaque praesentium rem et qui nesciunt.
-              </p>
-
+              <?php if(isset($content))echo $content?>
             </div>
           </div>
 
@@ -168,16 +153,16 @@ session_start();
             <div class="portfolio-info">
               <h3>Author information:</h3>
               <ul>
-                <li><strong>Name:</strong> <span>Ian</span></li>
-                <li><strong>Post date:</strong> <span>01 March, 2022</span></li>
-                <li><strong>Username:</strong> <a href="#">@user</a></li>
+                <li><strong>Name:</strong> <span><?php if(isset($authorName))echo $authorName?></span></li>
+                <li><strong>Post date:</strong> <span><?php if(isset($date))echo $date?></span></li>
+                <li><strong>Username:</strong> <a><?php if(isset($author))echo $author?></a></li>
                 <li >
                   <form action="profile.php" method="get" id="gotoprofile">
-                    <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
+                    <input type="hidden" name="username" value="<?php if(isset($author)) echo $author ?>">
                   </form>
                   <button class="btn btn-visit" type="submit" form="gotoprofile">
                       GO TO PROFILE
-                    </button>
+                  </button>
                 </li>
                 <li>
                   <button type="submit" class="btn btn-visit" style="background-color: black;">

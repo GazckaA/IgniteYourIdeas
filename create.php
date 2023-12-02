@@ -120,7 +120,7 @@ session_start();
           <div class="col-lg-6 text-center">
             <h2 id="title">Title</h2>
 
-            <a class="cta-btn rounded-pill" id="save">Save</a>
+            <a class="cta-btn rounded-pill" onclick="save()" id="save">Save</a>
 
           </div>
         </div>
@@ -136,8 +136,23 @@ session_start();
             <div class="swiper-wrapper align-items-center">
 
               <div class="swiper-slide">
-                <img src="assets/img/gallery/gallery-8.jpg" alt="" class="rounded">
+
+                <div class="gallery">
+                  <div class="gallery-item h-100">
+                  <img src="assets/img/gallery/gallery-2.jpg?v=<?php echo time(); ?>" class="img-fluid" alt="" id="portada">
+                  <div class="gallery-links d-flex align-items-center justify-content-center">
+                    <a onclick="addMainImgLink()" class="details-link" ><i class="bi bi-link"></i></a>
+                    <a class="details-link" data-bs-toggle="dropdown" ><i class="bi bi-upload"></i></a>
+                    <a class="dropdown-menu dropdown-menu-end">
+                      <input type="file" id="inputArchivo" onchange="uploadMainImg()" accept="image/*" class="m-1">
+                    </a>
+
+                  </div>
+                </div>
+
               </div>
+
+            </div>
 
             </div>
           </div>
@@ -152,6 +167,7 @@ session_start();
                   <div class="toolbar rounded-top" >
                       <div class="head">
                           <input type="text" placeholder="Filename" value="Title" id="filename" maxlength="155" >
+                          <input type="text" placeholder="Tags" value="Tags" id="tags" maxlength="155" >
                           <select onchange="formatDoc('formatBlock', this.value); this.selectedIndex=0;">
                               <option value="" selected="" hidden="" disabled="">Format</option>
                               <option value="h1">Heading 1</option>
@@ -180,10 +196,10 @@ session_start();
                               <span style="color: black;">Background</span>
                               <input type="color" oninput="formatDoc('hiliteColor', this.value); this.value='#000000';">
                           </div>
-                          <div class="color" style="background: #5bd9a9;border: black;">
-                              <span style="color: black;" data-bs-toggle="modal">Save</span>
+                          <div class="color" style="background: #5bd9a9;border: black;" onclick="save()">
+                              <span style="color: black;" id="save">Save</span>
                           </div>
-                          <div class="color" style="background: red;border: black;">
+                          <div class="color" style="background: red;border: black;" onclick="delete()">
                               <span style="color: white;" data-bs-toggle="modal">Delete</span>
                           </div>
                       </div>
@@ -203,6 +219,10 @@ session_start();
                           <button onclick="addLink()"><i class='bx bx-link' ></i></button>
                           <button onclick="formatDoc('unlink')"><i class='bx bx-unlink' ></i></button>
                           <button onclick="addImage()"><i class='bx bx-images' ></i></button>
+                          <button data-bs-toggle="dropdown" ><i class="bx bx-images"></i></button>
+                          <a class="dropdown-menu dropdown-menu-end">
+                            <input type="file" id="imgText" accept="image/*" class="m-1" onchange="imgText()">
+                          </a>
                           <button id="show-code" data-active="false">&lt;/&gt;</button>
                       </div>
                   </div>
@@ -218,16 +238,16 @@ session_start();
             <div class="portfolio-info">
               <h3>Author information:</h3>
               <ul>
-                <li><strong>Name:</strong> <span>Ian</span></li>
-                <li><strong>Post date:</strong> <span>01 March, 2022</span></li>
-                <li><strong>Username:</strong> @user</li>
+                <li><strong>Name:</strong> <span id="name"><?php echo $name?></span></li>
+                <li><strong>Post date:</strong> <span id="postdate"></span></li>
+                <li><strong>Username:</strong> <span id="author"><?php echo $username?></span></li>
                 <li >
                   <form action="profile.php" method="get" id="gotoprofile">
                     <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
                   </form>
                   <button class="btn btn-visit" type="submit" form="gotoprofile" disabled>
                       GO TO PROFILE
-                    </button>
+                  </button>
                 </li>
                 <li>
                   <button type="submit" class="btn btn-visit" style="background-color: black;" disabled>

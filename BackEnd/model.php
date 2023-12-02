@@ -260,12 +260,7 @@ class User{
             // Consulta preparada
             $stmt = $mysqli->prepare("UPDATE users SET password = ? WHERE username = ?");
             $stmt->bind_param("ss", $sanitizedNewPassword, $sanitizedUsername);
-            if (!$stmt) {
-                die("Error en la preparación de la consulta: " . $mysqli->error);
-            }
-            if (!$stmt->execute()) {
-                die("Error al ejecutar la consulta: " . $stmt->error);
-            }
+            $stmt->execute();
             $result = $stmt->get_result();
 
             // Verificar si se encontraron resultados
@@ -290,6 +285,67 @@ class User{
             header("Location: ../changePassword.php"); // Redirigir de nuevo al formulario de inicio de sesión
             $stmt->close();
             $mysqli->close();
+            exit();
+        }
+    }
+
+    /*--------------------------------------------------------------
+    # SAVE
+    --------------------------------------------------------------*/
+    public static function save($title, $author, $tags, $date, $image, $content, $authorName){
+        // Configuración de la conexión a MongoDB
+        $mongoDBHost = '64.227.106.157';  // Reemplaza con la dirección IP de tu droplet
+        $mongoDBPort = 27017;  // Puerto por defecto de MongoDB
+        $mongoDBName = 'Archives';  // Reemplaza con el nombre de tu base de datos
+        $collectionName = 'BlogEntrees';  // Reemplaza con el nombre de tu colección
+        $username = 'admin';  // Reemplaza con tu nombre de usuario
+        $password = '8d95d9cfd76d7171e7c5781a577ae2f52426d9f06bb6f65a';  // Reemplaza con tu contraseña
+
+        try {
+            // Configuración de autenticación
+            $authentication = [
+                'username' => $username,
+                'password' => $password,
+            ];// Opciones de conexión con autenticación
+            $options = [
+                'authMechanism' => 'SCRAM-SHA-256',
+                'authSource' => 'admin',
+            ];// Conectar a MongoDB con autenticación
+            $mongo = new MongoDB\Driver\Manager(
+                "mongodb://{$mongoDBHost}:{$mongoDBPort}",
+                $authentication,
+                $options
+            );
+        
+            // Crear un objeto con un campo de timestamp actual
+            $document = [
+                'title' => $title,
+                'author' => $author,
+                'authorName' => $authorName,
+                'date' => $date,
+                'tags' => $tags,
+                'image'=> $image,
+                'content' => $content,
+                'reviews'=> []
+            ];
+        
+            // Seleccionar la base de datos y la colección
+            $bulk = new MongoDB\Driver\BulkWrite();
+            $bulk->insert($document);
+        
+            $mongo->executeBulkWrite("{$mongoDBName}.{$collectionName}", $bulk);
+
+            // Seleccionar la base de datos y la colección
+            $query = new MongoDB\Driver\Query([], ['sort' => ['_id' => -1], 'limit' => 1]);
+            $cursor = $mongo->executeQuery("{$mongoDBName}.{$collectionName}", $query);
+
+            // Recorrer los documentos y mostrarlos
+            foreach ($cursor as $document) {
+                echo $document->_id;
+                exit();
+            }
+        } catch (MongoDB\Driver\Exception\Exception $e) {
+            echo "false";
             exit();
         }
     }
