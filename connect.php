@@ -35,6 +35,18 @@ session_start();
   <!--Resopnsive card-->
   <link rel="stylesheet" href="assets/css/responsive-blog-card-slider.css">
 
+  <style>
+    body {
+      background-image: url("assets/img/i2.jpg");
+      font-family: var(--font-default);
+      color: var(--color-default);
+      background-color: #000;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+
   <!-- =======================================================
   * Template Name: PhotoFolio
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -44,7 +56,7 @@ session_start();
   ======================================================== -->
 </head>
 
-<body style="background-image: url(assets/img/i2.jpg);">
+<body>
 <?php include 'BackEnd/getone.php';  ?>
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
@@ -57,8 +69,9 @@ session_start();
       <nav id="navbar" class="navbar me-1">
         <ul>
           <li><a href="index.php" >Contemplate</a></li>
-          <li><a class="active">Connect</a></li>
-          <li><a href="create.php" class="me-0 me-lg-2">Create</a></li>
+          <?php if($role != 'reader') echo '<li><a href="connect.php" class="active">Connect</a></li>
+          <li><a href="create.php" class="me-0 me-lg-2">Create</a></li>'; 
+          else echo '<li><a href="connect.php" class="me-0 me-lg-2 active">Connect</a></li>';?>
           <li class="dropdown d-xxl-none me-0 me-lg-2"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li>
@@ -79,8 +92,8 @@ session_start();
               </li>
             </ul>
           </li>
-          <li><form class="d-flex m-2 m-xxl-0">
-                <input class="form-control me-sm-2" type="search" placeholder="Search" required>
+          <li><form class="d-flex m-2 m-xxl-0" action="search.php" method="GET">
+                <input class="form-control me-sm-2" type="search" placeholder="Search" name="query" required>
                 <button class="btn btn-outline-light-sm my-2 my-sm-0" type="submit">
                     <i class="bi bi-search"></i>
                 </button>
@@ -130,18 +143,8 @@ session_start();
       <div class="container-fluid">
 
         <div class="row gy-4 justify-content-center">
-          <div class="col-xl-2 col-lg-3 col-md-4">
-            <div class="gallery-item h-100 rounded-circle" style="aspect-ratio: 1 / 1; ">
-              <img src="assets/img/gallery/user.jpg" class="img-fluid" alt="" style="height: 100%; object-fit: cover">
-              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
-                <div class="row m-0">
-                  <div class="col-12">
-                    <a href=""><h3><strong>@username</strong></h3></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
+          
+          <?php include 'BackEnd/getUsers.php';  ?>
 
         </div>
 

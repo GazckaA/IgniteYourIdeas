@@ -65,6 +65,7 @@ function formatDoc(cmd, value=null) {
 }
 
 var img = "";
+if ($('#portada').attr('src') != "assets/img/gallery/gallery-2.jpg") img = "url";
 
 function addMainImgLink() {
     const url = prompt('Insert url');
@@ -98,17 +99,15 @@ function save(){
         $("input").prop("disabled", true);
         $("select").prop("disabled", true);
         $("textarea").prop("disabled", true);
-        $("[onclick='save()']").addClass("bg-light");
-        $("[onclick='save()']").removeAttr("onclick");
-        $("[onclick='delete()']").addClass("bg-light");
-        $("[onclick='delete()']").removeAttr("onclick");
+        $('.color').removeAttr('onclick');
+        $('.color').addClass('bg-light');
 
         var image = $('#portada').attr('src');
         var content = $('#content').html();
         var title = $('#filename').val();
         var author = $('#author').html();
         var name = $('#name').html();
-        var tags = $('#tags').val();
+        var tags = $('#tags').val().replace(/ /g, "").split(",");
         var date = new Date().toLocaleString("en-US", {timeZone: 'UTC', dateStyle: "long", timeStyle: "short"});
         date += " (UTC+00:00)";
 
@@ -134,6 +133,7 @@ function save(){
             contentType: false,
             success: function (data) {
                 let cambio = data.substring(1);
+                console.log(cambio);
                 if (cambio != "false") {
                     window.location.href = "post.php?id=" + cambio;
                 } else {
@@ -188,4 +188,94 @@ function imgText() {
             elem.setAttribute("style", "max-width:100%");
         }
     })
+}
+
+function update(id){
+    if(img=="")alert("Please upload/add a cover image");
+    else if($('#filename').val() == "Title" || $('#filename').val() == "")alert("Please add a title");
+    else if($('#tags').val() == "Tags" || $('#tags').val() == "")alert("Please add tags");      
+    else{
+        // const url = prompt("Are you sure you want to update this post? If so, please type the title of the post to confirm.");
+        // if(url != $('#filename').val()) return;
+        //disable buttons
+        $("button").prop("disabled", true);
+        $("input").prop("disabled", true);
+        $("select").prop("disabled", true);
+        $("textarea").prop("disabled", true);
+        $('.color').removeAttr('onclick');
+        $('.color').addClass('bg-light');
+
+        var image = $('#portada').attr('src');
+        var content = $('#content').html();
+        var title = $('#filename').val();
+        var tags = $('#tags').val().replace(/ /g, "").split(",");
+        var date = new Date().toLocaleString("en-US", {timeZone: 'UTC', dateStyle: "long", timeStyle: "short"});
+        date += " (UTC+00:00)";
+
+        //objeto para mandar por ajax
+        var formData = new FormData();
+        formData.append('operation', 'updatePost');
+        formData.append('id', id);
+        formData.append('title', title);
+        formData.append('tags', tags);
+        formData.append('date', date);
+        formData.append('content', content);
+        formData.append('image', image);
+        // console.log('Contenido de FormData:');
+        // for (const entry of formData.entries()) {
+        //     console.log(entry[0], entry[1]);
+        // }
+        $.ajax({
+            url: 'BackEnd/controller.php',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                let cambio = data.substring(1);
+                if (cambio != "false") {
+                    window.location.href = "post.php?id=" + id;
+                } else {
+                    alert("Error saving post");
+                }
+            }
+        });
+    }
+}
+
+function deletePost(id){
+    if(img=="")alert("Please upload/add a cover image");
+    else if($('#filename').val() == "Title" || $('#filename').val() == "")alert("Please add a title");
+    else if($('#tags').val() == "Tags" || $('#tags').val() == "")alert("Please add tags");      
+    else{
+        const url = prompt("Are you sure you want to delete this post? If so, please type the title of the post to confirm.");
+        if(url != $('#filename').val()) return;
+        //disable buttons
+        $("button").prop("disabled", true);
+        $("input").prop("disabled", true);
+        $("select").prop("disabled", true);
+        $("textarea").prop("disabled", true);
+        $('.color').removeAttr('onclick');
+        $('.color').addClass('bg-light');
+
+        //objeto para mandar por ajax
+        var formData = new FormData();
+        formData.append('operation', 'deletePost');
+        formData.append('id', id);
+        $.ajax({
+            url: 'BackEnd/controller.php',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                let cambio = data.substring(1);
+                if (cambio != "false") {
+                    window.location.href = "index.php";
+                } else {
+                    alert("Error deleting post");
+                }
+            }
+        });
+    }
 }

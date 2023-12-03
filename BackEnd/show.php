@@ -43,6 +43,18 @@ try {
         $options
     );
 
+    // // Crear un objeto con un campo de timestamp actual
+    // $document = [
+    //     'username' => 'PruebaEvento',
+    //     'image'=> 'assets/img/gallery/user.jpg'
+    // ];
+
+    // // Seleccionar la base de datos y la colección
+    // $bulk = new MongoDB\Driver\BulkWrite();
+    // $bulk->insert($document);
+
+    // $mongo->executeBulkWrite("{$mongoDBName}.{$collectionName}", $bulk);
+
     // Seleccionar la base de datos y la colección
     $query = new MongoDB\Driver\Query([]);
     $cursor = $mongo->executeQuery("{$mongoDBName}.{$collectionName}", $query);

@@ -10,7 +10,7 @@ session_start();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title><?php include 'BackEnd/getPost.php'; if(isset($title))echo $title; else echo "Nothing to see here"?></title>
+  <title><?php include 'BackEnd/getPost.php'; if(isset($title))echo $title; else echo "Nothing to see here";?></title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -32,6 +32,18 @@ session_start();
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
+  <style>
+    body {
+      background-image: url("assets/img/i2.jpg");
+      font-family: var(--font-default);
+      color: var(--color-default);
+      background-color: #000;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+
   <!-- =======================================================
   * Template Name: PhotoFolio
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -41,7 +53,7 @@ session_start();
   ======================================================== -->
 </head>
 
-<body style="background-image: url(assets/img/i2.jpg);">
+<body>
 <?php include 'BackEnd/getone.php';  ?>
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
@@ -54,8 +66,9 @@ session_start();
       <nav id="navbar" class="navbar me-1">
         <ul>
           <li><a href="index.php">Contemplate</a></li>
-          <li><a href="connect.php">Connect</a></li>
-          <li><a href="create.php">Create</a></li>
+          <?php if($role != 'reader') echo '<li><a href="connect.php">Connect</a></li>
+          <li><a href="create.php">Create</a></li>'; 
+          else echo '<li><a href="connect.php" >Connect</a></li>';?>
           <li><a class="me-0 me-lg-2 active">Post</a></li>
           <li class="dropdown d-xxl-none me-0 me-lg-2"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
@@ -77,8 +90,8 @@ session_start();
               </li>
             </ul>
           </li>
-          <li><form class="d-flex m-2 m-xxl-0">
-                <input class="form-control me-sm-2" type="search" placeholder="Search" required>
+          <li><form class="d-flex m-2 m-xxl-0" action="search.php" method="GET">
+                <input class="form-control me-sm-2" type="search" placeholder="Search" name="query" required>
                 <button class="btn btn-outline-light-sm my-2 my-sm-0" type="submit">
                     <i class="bi bi-search"></i>
                 </button>
@@ -116,6 +129,7 @@ session_start();
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
             <h2><?php if(isset($title))echo $title; else echo "<script>alert('Nothing to see here');window.location.href = 'index.php';</script>"?></h2>
+            <p><?php echo $prettyTags;?></p>
 
             <?php if(isset($author)&& isset($username) && $author == $username) echo '<a class="cta-btn rounded-pill" href="create.php?id='.$id.'">Edit post</a>'?>
 
@@ -155,7 +169,7 @@ session_start();
               <ul>
                 <li><strong>Name:</strong> <span><?php if(isset($authorName))echo $authorName?></span></li>
                 <li><strong>Post date:</strong> <span><?php if(isset($date))echo $date?></span></li>
-                <li><strong>Username:</strong> <a><?php if(isset($author))echo $author?></a></li>
+                <li><strong>Username:</strong> <a>@<?php if(isset($author))echo $author?></a></li>
                 <li >
                   <form action="profile.php" method="get" id="gotoprofile">
                     <input type="hidden" name="username" value="<?php if(isset($author)) echo $author ?>">

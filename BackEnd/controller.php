@@ -29,6 +29,21 @@
             case 'save':
                 $user->save($title, $author, $tags, $date, $image, $content, $authorName);
                 break;
+            case 'update':
+                $user->update($username, $name, $lastname, $email, $description, $birthdate, $origin, $image, $role);
+                break;
+            case 'updatePost':
+                $user->updatePost($id, $title, $tags, $date, $image, $content);
+                break;
+            case 'deletePost':
+                $user->deletePost($id);
+                break;
+            case 'deleteUser':
+                $user->deleteUser($username, $password);
+                break;
+            case 'adminPass':
+                $user->adminPass( $password);
+                break;
         }
     }
 

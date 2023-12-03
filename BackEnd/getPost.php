@@ -44,6 +44,15 @@ if(isset($_GET['id'])){
             $authorName = $document->authorName;
         }
 
+        $temp = "";
+        $prettyTags = "";
+        foreach ($tags as $tag) {
+            $temp .= $tag . ",";
+            $prettyTags .= "<a href='search.php?query=".$tag."'>#" . $tag . "</a>, ";
+        }
+        $tags = substr($temp ,0, strlen($temp)-1);
+        $prettyTags = substr($prettyTags ,0, strlen($prettyTags)-2);
+
     }catch (MongoDB\Driver\Exception\Exception $e) {
         echo "Conexion error: please try again.";
     }

@@ -31,11 +31,7 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-body {
-  font-family: var(--font-default);
-  color: var(--color-default);
-  background-color: #000;
-}
+
 
 a {
   color: var(--color-primary);

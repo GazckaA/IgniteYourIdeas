@@ -3,10 +3,16 @@
 session_start();
 
 
+//if error
+if(isset($_SESSION['error'])){
+    $error = $_SESSION['error'];
+    unset($_SESSION['error']);
+    echo "<script>alert('$error');</script>";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -33,6 +39,18 @@ session_start();
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
+  <style>
+    body {
+      background-image: url("assets/img/i2.jpg");
+      font-family: var(--font-default);
+      color: var(--color-default);
+      background-color: #000;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+
   <!-- =======================================================
   * Template Name: PhotoFolio
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -42,7 +60,7 @@ session_start();
   ======================================================== -->
 </head>
 
-<body style="background-image: url(assets/img/i2.jpg);">
+<body>
 <?php include 'BackEnd/getone.php'; ?>
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
@@ -55,10 +73,19 @@ session_start();
       <nav id="navbar" class="navbar me-1">
         <ul>
           <li><a href="index.php">Contemplate</a></li>
-          <li><a href="connect.php">Connect</a></li>
-          <li><a href="create.php" class="me-0 me-lg-2">Create</a></li>
+          <?php if($role != 'reader') echo '<li><a href="connect.php">Connect</a></li>
+          <li><a href="create.php" class="me-0 me-lg-2">Create</a></li>'; 
+          else echo '<li><a href="connect.php" class="me-0 me-lg-2">Connect</a></li>';?>
           <li class="dropdown active d-xxl-none me-0 me-lg-2"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
+              <?php if($pusername != $username) echo '<li>
+                <form action="profile.php" method="get">
+                    <input type="hidden" name="username" value="'. $_SESSION['username'].'">
+                    <button class="btn btn-link mx-2" type="submit">
+                      MY PROFILE
+                    </button>
+                  </form>
+              </li>'?>
               <li>
                 <form action="index.php" method="post">
                     <input type="hidden" name="operation" value="logout">
@@ -69,8 +96,8 @@ session_start();
               </li>
             </ul>
           </li>
-          <li><form class="d-flex m-2 m-xxl-0">
-                <input class="form-control me-sm-2" type="search" placeholder="Search" required>
+          <li><form class="d-flex m-2 m-xxl-0" action="search.php" method="GET">
+                <input class="form-control me-sm-2" type="search" placeholder="Search" name="query" required>
                 <button class="btn btn-outline-light-sm my-2 my-sm-0" type="submit">
                     <i class="bi bi-search"></i>
                 </button>
@@ -78,6 +105,12 @@ session_start();
           <li class="nav-item dropdown d-none d-xxl-block">
             <a class="nav-link dropdown-toggle me-0 me-lg-2 active" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle dropdown-indicator"></i></a>
                 <div class="dropdown-menu dropdown-menu-end">
+                  <?php if($pusername != $username)echo '<form action="profile.php" method="get">
+                    <input type="hidden" name="username" value="'.$_SESSION['username'].'">
+                    <button class="btn btn-link mx-2" type="submit">
+                      MY PROFILE
+                    </button>
+                  </form>'?>
                   <form action="index.php" method="post">
                     <input type="hidden" name="operation" value="logout">
                     <button type="submit" class="btn btn-link mx-2">
@@ -104,7 +137,7 @@ session_start();
             <h2>@<?php echo $pusername?></h2>
             <p><?php echo $pdescription;?></p>
 
-            <a class="cta-btn" href="editProfile.php?username=<?php echo $pusername?>"><?php if($pdescription == null || $pbirthdate == null || $plastname == null)echo 'COMPLETE PROFILE'; else echo 'EDIT PROFILE';?></a>
+            <?php if($prole == $role || $role == 'admin'){ echo '<a class="cta-btn" href="editProfile.php?username='. $pusername.'">'; if($pdescription == null || $pbirthdate == null || $plastname == null)echo 'COMPLETE PROFILE'; else echo 'EDIT PROFILE'; echo '</a>'; }?>
 
           </div>
         </div>
@@ -117,7 +150,7 @@ session_start();
 
         <div class="row gy-4 justify-content-center">
           <div class="col-lg-4">
-            <img src="<?php if(isset($image))echo $image; else echo 'assets/img/gallery/user.jpg';?>" class="img-fluid rounded" alt="">
+            <img src="<?php if(isset($image))echo $image; ?>" class="img-fluid rounded" alt="">
           </div>
           <div class="col-lg-5 content">
             <h2>More about me:</h2>
@@ -126,7 +159,12 @@ session_start();
                 <ul>
                   <li><i class="bi bi-chevron-right"></i> <strong>Name:</strong> <?php echo $pname ?></li>
                   <?php if($plastname != null)echo '<li><i class="bi bi-chevron-right"></i> <strong>Last Name:</strong> '.$plastname.'</li>' ?> 
-                  <?php if($pbirthdate != null)echo '<li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong>'.$pbirthdate.'</li><li><i class="bi bi-chevron-right"></i> <strong>Age:</strong>'. getAge($pbirthdate).'</li>';?>
+                  <?php 
+                  if($pbirthdate != null) {
+                    $formattedDate = date("F j, Y", strtotime($pbirthdate));
+                    echo '<li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong>'.$formattedDate.'</li><li><i class="bi bi-chevron-right"></i> <strong>Age:</strong>'. getAge($pbirthdate).'</li>';
+                  }
+                  ?>
                 </ul>
               </div>
               <div class="col-lg-6">
@@ -144,162 +182,7 @@ session_start();
       </div>
     </section><!-- End About Section -->
 
-    <!-- ======= Gallery Section ======= -->
-    <section id="gallery" class="gallery">
-      <div class="container-fluid">
-
-        <div class="container">
-            <div class="section-header">
-            <h2>Posts</h2>
-            <p>@user's most recent thoughts</p>
-            </div>
-        </div>
-
-        <div class="row gy-4 justify-content-center">
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
-              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
-                <div class="row m-0">
-                  <div class="col-12">
-                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
-                  </div>
-                  <div class="col-12 text-end">
-                    <strong>-@username</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
-              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
-                <div class="row m-0">
-                  <div class="col-12">
-                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
-                  </div>
-                  <div class="col-12 text-end">
-                    <strong>-@username</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
-              <div class="gallery-links d-flex justify-content-center" style="align-items:center;">
-                <div class="row m-0">
-                  <div class="col-12">
-                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magnam cupiditate voluptates facilis quod quasi delectus corrupti facere aliquam veritatis!</h4>
-                  </div>
-                  <div class="col-12 text-end">
-                    <strong>-@username</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-        </div>
-
-      </div>
-    </section><!-- End Gallery Section -->
-
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials mb-4">
-      <div class="container">
-
-        <div class="section-header">
-          <h2>Testimonials</h2>
-          <p>What they are saying</p>
-        </div>
-
-        <div class="slides-3 swiper">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                </p>
-                <div class="profile mt-auto">
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                </p>
-                <div class="profile mt-auto">
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                </p>
-                <div class="profile mt-auto">
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                </p>
-                <div class="profile mt-auto">
-                  <h3>Matt Brandon</h3>
-                  <h4>Freelancer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                </p>
-                <div class="profile mt-auto">
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Testimonials Section -->
+        <?php include 'BackEnd/getPosts.php'; userPosts($pusername, $prole); ?>
 
   </main><!-- End #main -->
 

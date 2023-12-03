@@ -43,6 +43,18 @@ if(isset($_SESSION['error'])){
     <!-- Custom CSS for login & register-->
     <link rel="stylesheet" href="assets/css/Landing-Page---Parallax-Background---Logo-Heading-ButtonGIF.css">
     <link rel="stylesheet" href="assets/css/Login-with-overlay-image.css">
+
+    <style>
+    body {
+      background-image: url("assets/img/i2.jpg");
+      font-family: var(--font-default);
+      color: var(--color-default);
+      background-color: #000;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
 </head>
 
 <body ><div id="main-wrapper" class="container mb-3">

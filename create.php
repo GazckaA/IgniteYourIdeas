@@ -36,6 +36,18 @@ session_start();
   <link rel="stylesheet" href="assets/css/textEditor.css">
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
+  <style>
+    body {
+      background-image: url("assets/img/i2.jpg");
+      font-family: var(--font-default);
+      color: var(--color-default);
+      background-color: #000;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+
   <!-- =======================================================
   * Template Name: PhotoFolio
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -45,8 +57,8 @@ session_start();
   ======================================================== -->
 </head>
 
-<body style="background-image: url(assets/img/i2.jpg);">
-<?php include 'BackEnd/getone.php';  ?>
+<body >
+<?php include 'BackEnd/getone.php'; if($role == 'reader')echo '<script>alert("Not allowed! You currently don\'t have creation privilege, change your role in profile.")</script>' ;?>
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -80,8 +92,8 @@ session_start();
               </li>
             </ul>
           </li>
-          <li><form class="d-flex m-2 m-xxl-0">
-                <input class="form-control me-sm-2" type="search" placeholder="Search" required>
+          <li><form class="d-flex m-2 m-xxl-0" action="search.php" method="GET">
+                <input class="form-control me-sm-2" type="search" placeholder="Search" name="query" required>
                 <button class="btn btn-outline-light-sm my-2 my-sm-0" type="submit">
                     <i class="bi bi-search"></i>
                 </button>
@@ -120,7 +132,7 @@ session_start();
           <div class="col-lg-6 text-center">
             <h2 id="title"><?php if(isset($title))echo $title; else echo "Title" ?></h2>
 
-            <a class="cta-btn rounded-pill" onclick="<?php if(isset($id))echo 'update()'; else echo 'save()'?>" >Save</a>
+            <a class="cta-btn rounded-pill color" onclick="<?php if(isset($id))echo 'update(\''.$id.'\')'; else echo 'save()'?>" >Save</a>
 
           </div>
         </div>
@@ -139,7 +151,7 @@ session_start();
 
                 <div class="gallery">
                   <div class="gallery-item h-100">
-                  <img src="<?php if(isset($image))echo $image; else echo 'assets/img/gallery/gallery-2.jpg?v='.time();?>" class="img-fluid" alt="" id="portada">
+                  <img src="<?php if(isset($image))echo $image; else echo 'assets/img/gallery/gallery-2.jpg';?>" class="img-fluid" alt="" id="portada">
                   <div class="gallery-links d-flex align-items-center justify-content-center">
                     <a onclick="addMainImgLink()" class="details-link" ><i class="bi bi-link"></i></a>
                     <a class="details-link" data-bs-toggle="dropdown" ><i class="bi bi-upload"></i></a>
@@ -166,8 +178,8 @@ session_start();
             <div class="container p-0 my-2" >
                   <div class="toolbar rounded-top" >
                       <div class="head">
-                          <input type="text" placeholder="Filename" value="<?php if(isset($title))echo $title; else echo 'Title'?>" id="filename" maxlength="155" >
-                          <input type="text" placeholder="Tags" value="<?php if(isset($tags))echo $tags; else echo 'Tags'?>" id="tags" maxlength="155" >
+                          <input autocomplete="off" type="text" placeholder="Filename" value="<?php if(isset($title))echo $title; else echo 'Title'?>" id="filename" maxlength="155" >
+                          <input autocomplete="off" type="text" placeholder="Tag1,tag2" value="<?php if(isset($tags))echo $tags; else echo 'Tag1,tag2'?>" id="tags" maxlength="155" >
                           <select onchange="formatDoc('formatBlock', this.value); this.selectedIndex=0;">
                               <option value="" selected="" hidden="" disabled="">Format</option>
                               <option value="h1">Heading 1</option>
@@ -196,12 +208,13 @@ session_start();
                               <span style="color: black;">Background</span>
                               <input type="color" oninput="formatDoc('hiliteColor', this.value); this.value='#000000';">
                           </div>
-                          <div class="color" style="background: #5bd9a9;border: black;" onclick="<?php if(isset($id))echo 'update()'; else echo 'save()'?>">
+                          <div class="color" style="background: #5bd9a9;border: black;" onclick="<?php if(isset($id))echo 'update(\''.$id.'\')'; else echo 'save()'?>">
                               <span style="color: black;" >Save</span>
                           </div>
-                          <div class="color" style="background: red;border: black;" onclick="delete()">
+                          <?php if(isset($id))echo '<div class="color" style="background: red;border: black;" onclick="deletePost(\''.$id.'\')">
                               <span style="color: white;" data-bs-toggle="modal">Delete</span>
-                          </div>
+                          </div>';?>
+                          
                       </div>
                       <div class="btn-toolbar">
                           <button onclick="formatDoc('undo')"><i class='bx bx-undo' ></i></button>

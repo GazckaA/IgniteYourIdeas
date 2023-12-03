@@ -13,10 +13,10 @@ else{
     $sanitizedUsername = mysqli_real_escape_string($mysqli, $_SESSION['username']);
 
     // Consulta preparada 
-    $stmt = $mysqli->prepare("SELECT name, description,birthdate, token, email, username FROM users WHERE username = ?");
+    $stmt = $mysqli->prepare("SELECT name, description,birthdate, token, email, username, role FROM users WHERE username = ?");
     $stmt->bind_param("s", $sanitizedUsername);
     $stmt->execute();
-    $stmt->bind_result($name, $description, $birthdate, $token, $email, $username);
+    $stmt->bind_result($name, $description, $birthdate, $token, $email, $username, $role);
     $stmt->fetch();
     $stmt->close();
 
