@@ -31,6 +31,8 @@ session_start();
 
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
 
   <style>
     body {
@@ -179,7 +181,7 @@ session_start();
                   </button>
                 </li>
                 <li>
-                  <button type="submit" class="btn btn-visit" style="background-color: black;">
+                  <button type="button" class="btn btn-visit" style="background-color: black;"data-bs-toggle="modal" data-bs-target="#review">
                       REVIEW POST
                   </button>
                 </li>
@@ -197,87 +199,14 @@ session_start();
       <div class="container">
 
         <div class="section-header">
-          <h2>REVEWS</h2>
-          <p>What they are saying</p>
+          <h2>REVIEWS</h2>
+          <p>What they are saying? <?php if(isset($count) && isset($prom) && $count > 0) echo '('.$prom/$count.' based on '.$count.' reviews)';?></p>
         </div>
 
         <div class="slides-3 swiper">
           <div class="swiper-wrapper">
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                </p>
-                <div class="profile mt-auto">
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                </p>
-                <div class="profile mt-auto">
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                </p>
-                <div class="profile mt-auto">
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                </p>
-                <div class="profile mt-auto">
-                  <h3>Matt Brandon</h3>
-                  <h4>Freelancer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                </p>
-                <div class="profile mt-auto">
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+            <?php if(isset($echoTestimonials))echo $echoTestimonials;?>
 
           </div>
           <div class="swiper-pagination"></div>
@@ -304,6 +233,41 @@ session_start();
     </div>
   </footer><!-- End Footer -->
 
+  <!-- Modal -->
+  <div class="modal fade" id="review" tabindex="-1" aria-labelledby="review" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="review">REVIEW</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <h4 class="text-center mx-0 mx-md-2 my-2">
+            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
+            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
+            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_3" data-rating="3"></i>
+            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_4" data-rating="4"></i>
+            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
+          </h4>
+          <form action="BackEnd/controller.php" method="POST" id="reviewForm"> 
+            <input type="hidden" name="operation" value="review">
+            <input type="hidden" name="id" value="<?php echo $id;?>">
+            <input type="hidden" name="username" value="<?php echo $_SESSION['username'];?>">
+            <input type="hidden" name="rating" id="rating" value="0">
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Review:</label>
+              <textarea type="text" class="form-control" id="recipient-name" name="review" required style="height: 40vh;"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
+          <button type="submit" class="btn btn-success"  form="reviewForm">SAVE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <div id="preloader">
@@ -316,10 +280,61 @@ session_start();
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/jquery.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js?v=<?php echo time(); ?>"></script>
 
+  <!-- Rating -->
+  <script>
+    var rating_data = 0;
+
+    $(document).on('click', '.submit_star', function(){
+
+      rating_data = $(this).data('rating');
+      
+      $('#rating').val(rating_data);
+
+    });
+    $(document).on('mouseenter', '.submit_star', function(){
+
+      var rating = $(this).data('rating');
+
+      reset_background();
+
+      for(var count = 1; count <= rating; count++)
+      {
+
+          $('#submit_star_'+count).addClass('text-warning');
+
+      }
+
+    }); 
+    function reset_background()
+    {
+        for(var count = 1; count <= 5; count++)
+        {
+
+            $('#submit_star_'+count).addClass('star-light');
+
+            $('#submit_star_'+count).removeClass('text-warning');
+
+        }
+    }
+    $(document).on('mouseleave', '.submit_star', function(){
+
+      reset_background();
+
+      for(var count = 1; count <= rating_data; count++)
+      {
+
+          $('#submit_star_'+count).removeClass('star-light');
+
+          $('#submit_star_'+count).addClass('text-warning');
+      }
+
+    });
+  </script>
 </body>
 
 </html>

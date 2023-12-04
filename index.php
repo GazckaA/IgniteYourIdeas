@@ -150,7 +150,7 @@ if(isset($_SESSION['error'])){
     </div>
   </section><!-- End Hero Section -->
   <!-- ======= Main ======= -->
-  <main id="main" class="mb-4" data-aos="fade" data-aos-delay="1500" style="height: 500vh;">
+  <main id="main" class="mb-4" data-aos="fade" data-aos-delay="1500" >
 
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery">

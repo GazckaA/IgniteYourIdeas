@@ -1,6 +1,5 @@
 ﻿<?php
 
-phpinfo();
 
 // Configurar la zona horaria a la que deseas ajustar la fecha
 date_default_timezone_set('Etc/GMT+8');

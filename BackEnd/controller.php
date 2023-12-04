@@ -44,6 +44,9 @@
             case 'adminPass':
                 $user->adminPass( $password);
                 break;
+            case 'review':
+                $user->review($rating, $username, $review, $id);
+                break;
         }
     }
 

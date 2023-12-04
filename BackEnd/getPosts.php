@@ -121,7 +121,7 @@ function userPosts($pusername, $prole){
 
 
   // Seleccionar la base de datos y la colección
-  $query = new MongoDB\Driver\Query(["author" => $pusername],['limit' => 6]);
+  $query = new MongoDB\Driver\Query(["author" => $pusername],['limit' => 6, 'sort' => ['_id' => -1]]);
   $cursor = $mongo->executeQuery("{$mongoDBName}.{$collectionName}", $query);
   // Configuración de la conexión a MongoDB
   // Recorrer los documentos y mostrarlos
@@ -169,22 +169,37 @@ function userPosts($pusername, $prole){
   </section><!-- End Gallery Section -->';
 
     $echo = "";
+
+    $stars = [
+      0 => '',
+      1 => '<i class="bi bi-star-fill"></i>',
+      2 => '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>',
+      3 => '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>',
+      4 => '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>',
+      5 => '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>'
+    ];
+
+    $prom = 0;
+    $count = 0;
     foreach ($reviews as $review) {
-      foreach ($review as $r) {
+        if (count($review) == 0)continue;
+        foreach($review as $r){
+          $prom += $r->rating;
+          $count++;
+        }
         $echo .= '<div class="swiper-slide">
         <div class="testimonial-item">
           <div class="stars">
-            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            '.$stars[$review[0]->rating].'
           </div>
           <p>
-            '.$review->content.'
+            '.$review[0]->review.'
           </p>
           <div class="profile mt-auto">
-            <h3>'.$review->author.'</h3>
+            <h3>'.$review[0]->username.'</h3>
           </div>
         </div>
       </div><!-- End testimonial item -->';
-      }
     }
 
     if ($echo != ""){
@@ -194,7 +209,7 @@ function userPosts($pusername, $prole){
    
            <div class="section-header">
              <h2>Testimonials</h2>
-             <p>What they are saying</p>
+             <p>What they are saying? ('.$prom/$count.' based on '.$count.' reviews)</p>
            </div>
    
            <div class="slides-3 swiper">
