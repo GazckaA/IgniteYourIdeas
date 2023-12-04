@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 
@@ -14,10 +14,10 @@ class User{
 
         // Sanitizar los datos
         $sanitizedUsername = mysqli_real_escape_string($mysqli, $username);
-        $sanitizedPassword = mysqli_real_escape_string($mysqli, $password);
+        $sanitizedPassword = $password;
 
         // Consulta preparada para obtener el hash de la contraseña almacenado en la base de datos
-        $stmt = $mysqli->prepare("SELECT password FROM users WHERE LOWER(username) = LOWER(?) OR LOWER(email) = LOWER(?)");
+        $stmt = $mysqli->prepare("SELECT username, password FROM users WHERE LOWER(username) = LOWER(?) OR LOWER(email) = LOWER(?)");
         if (!$stmt) {
             $_SESSION['error'] = "Log in error: please try again.";
             header("Location: ../login.php"); // Redirigir de nuevo al formulario de inicio de sesión
@@ -29,7 +29,7 @@ class User{
             header("Location: ../login.php"); // Redirigir de nuevo al formulario de inicio de sesión
             exit();
         }
-        $stmt->bind_result($hashedPassword);
+        $stmt->bind_result($username, $hashedPassword);
         $stmt->fetch();
         $stmt->close();
         $mysqli->close();
@@ -38,7 +38,7 @@ class User{
         if (password_verify($sanitizedPassword, $hashedPassword)) {
             // Usuario autenticado con éxito
             $_SESSION['loggedin'] = true;
-            $_SESSION['username'] = $sanitizedUsername;
+            $_SESSION['username'] = $username;
             header("Location: ../index.php"); // Redirigir a la página de bienvenida o a donde desees
             exit();
         } else {
