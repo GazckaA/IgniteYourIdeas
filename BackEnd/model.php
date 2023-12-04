@@ -14,10 +14,10 @@ class User{
 
         // Sanitizar los datos
         $sanitizedUsername = mysqli_real_escape_string($mysqli, $username);
-        $sanitizedPassword = mysqli_real_escape_string($mysqli, $password);
+        $sanitizedPassword = $password;
 
         // Consulta preparada para obtener el hash de la contraseña almacenado en la base de datos
-        $stmt = $mysqli->prepare("SELECT password FROM users WHERE LOWER(username) = LOWER(?) OR LOWER(email) = LOWER(?)");
+        $stmt = $mysqli->prepare("SELECT username, password FROM users WHERE LOWER(username) = LOWER(?) OR LOWER(email) = LOWER(?)");
         if (!$stmt) {
             $_SESSION['error'] = "Log in error: please try again.";
             header("Location: ../login.php"); // Redirigir de nuevo al formulario de inicio de sesión
@@ -29,7 +29,7 @@ class User{
             header("Location: ../login.php"); // Redirigir de nuevo al formulario de inicio de sesión
             exit();
         }
-        $stmt->bind_result($hashedPassword);
+        $stmt->bind_result($username, $hashedPassword);
         $stmt->fetch();
         $stmt->close();
         $mysqli->close();
@@ -38,7 +38,7 @@ class User{
         if (password_verify($sanitizedPassword, $hashedPassword)) {
             // Usuario autenticado con éxito
             $_SESSION['loggedin'] = true;
-            $_SESSION['username'] = $sanitizedUsername;
+            $_SESSION['username'] = $username;
             header("Location: ../index.php"); // Redirigir a la página de bienvenida o a donde desees
             exit();
         } else {
@@ -371,7 +371,7 @@ class User{
                 'tags' => $obj,
                 'image'=> $image,
                 'content' => $content,
-                'reviews'=> array()
+                'reviews'=> []
             ];
         
             // Seleccionar la base de datos y la colección
@@ -666,50 +666,6 @@ class User{
             echo "fail";
             exit();
         }
-    }
-
-    /*--------------------------------------------------------------
-    # REVIEW
-    --------------------------------------------------------------*/
-    public static function review($rating, $usernamee, $review, $id){
-        // Configuración de la conexión a MongoDB
-        $mongoDBHost = '64.227.106.157';  // Reemplaza con la dirección IP de tu droplet
-        $mongoDBPort = 27017;  // Puerto por defecto de MongoDB
-        $mongoDBName = 'Archives';  // Reemplaza con el nombre de tu base de datos
-        $collectionName = 'BlogEntrees';  // Reemplaza con el nombre de tu colección
-        $username = 'admin';  // Reemplaza con tu nombre de usuario
-        $password = '8d95d9cfd76d7171e7c5781a577ae2f52426d9f06bb6f65a';  // Reemplaza con tu contraseña
-
-            // Configuración de autenticación
-            $authentication = [
-                'username' => $username,
-                'password' => $password,
-            ];// Opciones de conexión con autenticación
-            $options = [
-                'authMechanism' => 'SCRAM-SHA-256',
-                'authSource' => 'admin',
-            ];// Conectar a MongoDB con autenticación
-            $mongo = new MongoDB\Driver\Manager(
-                "mongodb://{$mongoDBHost}:{$mongoDBPort}",
-                $authentication,
-                $options
-            );
-
-            $obj = ["username" => $usernamee, "rating" => $rating, "review" => $review];
-        
-            // Crear un objeto con un campo de timestamp actual
-            // Crear un objeto con un campo de timestamp actual
-            $document = [ '$push'=> ['reviews' => $obj]];
-        
-            // Seleccionar la base de datos y la colección
-            $bulk = new MongoDB\Driver\BulkWrite();
-            $bulk->update(['_id' =>new MongoDB\BSON\ObjectID($id)], $document);
-        
-            $mongo->executeBulkWrite("{$mongoDBName}.{$collectionName}", $bulk);
-
-            header("Location: ../post.php?id=".$id);
-            exit();
-        
     }
 };
 ?>
