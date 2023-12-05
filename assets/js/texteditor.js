@@ -132,7 +132,7 @@ function save(){
             processData: false,
             contentType: false,
             success: function (data) {
-                let cambio = data.substring(1);
+                let cambio = data;
                 console.log(cambio);
                 if (cambio != "false") {
                     window.location.href = "post.php?id=" + cambio;
