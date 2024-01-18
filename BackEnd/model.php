@@ -79,12 +79,12 @@ class User{
         if ($stmt->affected_rows > 0) {
 
             // Configuración de la conexión a MongoDB
-            $mongoDBHost = '64.227.106.157';  // Reemplaza con la dirección IP de tu droplet
+            $mongoDBHost = '64.23.157.97';  // Reemplaza con la dirección IP de tu droplet
             $mongoDBPort = 27017;  // Puerto por defecto de MongoDB
             $mongoDBName = 'Archives';  // Reemplaza con el nombre de tu base de datos
             $collectionName = 'users';  // Reemplaza con el nombre de tu colección
             $username = 'admin';  // Reemplaza con tu nombre de usuario
-            $password = '8d95d9cfd76d7171e7c5781a577ae2f52426d9f06bb6f65a';  // Reemplaza con tu contraseña
+            $password = 'f789389b6e55189def67a1af52ce996238ce41485f0a67b2';  // Reemplaza con tu contraseña
 
             try {
                 // Configuración de autenticación
@@ -333,12 +333,12 @@ class User{
     --------------------------------------------------------------*/
     public static function save($title, $author, $tags, $date, $image, $content, $authorName){
         // Configuración de la conexión a MongoDB
-        $mongoDBHost = '64.227.106.157';  // Reemplaza con la dirección IP de tu droplet
+        $mongoDBHost = '64.23.157.97';  // Reemplaza con la dirección IP de tu droplet
         $mongoDBPort = 27017;  // Puerto por defecto de MongoDB
         $mongoDBName = 'Archives';  // Reemplaza con el nombre de tu base de datos
         $collectionName = 'BlogEntrees';  // Reemplaza con el nombre de tu colección
         $username = 'admin';  // Reemplaza con tu nombre de usuario
-        $password = '8d95d9cfd76d7171e7c5781a577ae2f52426d9f06bb6f65a';  // Reemplaza con tu contraseña
+        $password = 'f789389b6e55189def67a1af52ce996238ce41485f0a67b2';  // Reemplaza con tu contraseña
 
         try {
             // Configuración de autenticación
@@ -423,12 +423,12 @@ class User{
         }else{
             if($image != null){
                 // Configuración de la conexión a MongoDB
-                $mongoDBHost = '64.227.106.157';  // Reemplaza con la dirección IP de tu droplet
+                $mongoDBHost = '64.23.157.97';  // Reemplaza con la dirección IP de tu droplet
                 $mongoDBPort = 27017;  // Puerto por defecto de MongoDB
                 $mongoDBName = 'Archives';  // Reemplaza con el nombre de tu base de datos
                 $collectionName = 'users';  // Reemplaza con el nombre de tu colección
                 $username = 'admin';  // Reemplaza con tu nombre de usuario
-                $password = '8d95d9cfd76d7171e7c5781a577ae2f52426d9f06bb6f65a';  // Reemplaza con tu contraseña
+                $password = 'f789389b6e55189def67a1af52ce996238ce41485f0a67b2';  // Reemplaza con tu contraseña
 
                 try {
                     // Configuración de autenticación
@@ -472,12 +472,12 @@ class User{
     --------------------------------------------------------------*/
     public static function updatePost($id, $title, $tags, $date, $image, $content){
         // Configuración de la conexión a MongoDB
-        $mongoDBHost = '64.227.106.157';  // Reemplaza con la dirección IP de tu droplet
+        $mongoDBHost = '64.23.157.97';  // Reemplaza con la dirección IP de tu droplet
         $mongoDBPort = 27017;  // Puerto por defecto de MongoDB
         $mongoDBName = 'Archives';  // Reemplaza con el nombre de tu base de datos
         $collectionName = 'BlogEntrees';  // Reemplaza con el nombre de tu colección
         $username = 'admin';  // Reemplaza con tu nombre de usuario
-        $password = '8d95d9cfd76d7171e7c5781a577ae2f52426d9f06bb6f65a';  // Reemplaza con tu contraseña
+        $password = 'f789389b6e55189def67a1af52ce996238ce41485f0a67b2';  // Reemplaza con tu contraseña
 
         try {
             // Configuración de autenticación
@@ -529,12 +529,12 @@ class User{
     --------------------------------------------------------------*/
     public static function deletePost($id){
         // Configuración de la conexión a MongoDB
-        $mongoDBHost = '64.227.106.157';  // Reemplaza con la dirección IP de tu droplet
+        $mongoDBHost = '64.23.157.97';  // Reemplaza con la dirección IP de tu droplet
         $mongoDBPort = 27017;  // Puerto por defecto de MongoDB
         $mongoDBName = 'Archives';  // Reemplaza con el nombre de tu base de datos
         $collectionName = 'BlogEntrees';  // Reemplaza con el nombre de tu colección
         $username = 'admin';  // Reemplaza con tu nombre de usuario
-        $password = '8d95d9cfd76d7171e7c5781a577ae2f52426d9f06bb6f65a';  // Reemplaza con tu contraseña
+        $password = 'f789389b6e55189def67a1af52ce996238ce41485f0a67b2';  // Reemplaza con tu contraseña
 
         try {
             // Configuración de autenticación
@@ -599,12 +599,12 @@ class User{
             if ($stmt->affected_rows > 0) {
 
                 // Configuración de la conexión a MongoDB
-                $mongoDBHost = '64.227.106.157';  // Reemplaza con la dirección IP de tu droplet
+                $mongoDBHost = '64.23.157.97';  // Reemplaza con la dirección IP de tu droplet
                 $mongoDBPort = 27017;  // Puerto por defecto de MongoDB
                 $mongoDBName = 'Archives';  // Reemplaza con el nombre de tu base de datos
                 $collectionName = 'BlogEntrees';  // Reemplaza con el nombre de tu colección
                 $username = 'admin';  // Reemplaza con tu nombre de usuario
-                $password = '8d95d9cfd76d7171e7c5781a577ae2f52426d9f06bb6f65a';  // Reemplaza con tu contraseña
+                $password = 'f789389b6e55189def67a1af52ce996238ce41485f0a67b2';  // Reemplaza con tu contraseña
                 // Configuración de autenticación
                 $authentication = [
                     'username' => $username,
@@ -676,12 +676,12 @@ class User{
     --------------------------------------------------------------*/
     public static function review($rating, $usernamee, $review, $id){
         // Configuración de la conexión a MongoDB
-        $mongoDBHost = '64.227.106.157';  // Reemplaza con la dirección IP de tu droplet
+        $mongoDBHost = '64.23.157.97';  // Reemplaza con la dirección IP de tu droplet
         $mongoDBPort = 27017;  // Puerto por defecto de MongoDB
         $mongoDBName = 'Archives';  // Reemplaza con el nombre de tu base de datos
         $collectionName = 'BlogEntrees';  // Reemplaza con el nombre de tu colección
         $username = 'admin';  // Reemplaza con tu nombre de usuario
-        $password = '8d95d9cfd76d7171e7c5781a577ae2f52426d9f06bb6f65a';  // Reemplaza con tu contraseña
+        $password = 'f789389b6e55189def67a1af52ce996238ce41485f0a67b2';  // Reemplaza con tu contraseña
 
             // Configuración de autenticación
             $authentication = [
@@ -715,4 +715,5 @@ class User{
 
     }
 };
+
 ?>

@@ -17,12 +17,12 @@ $fechaHoraActual = $fechaActual . " @: " . $horaActual." (GMT+8)";
 echo $fechaHoraActual;
 
 // Configuración de la conexión a MongoDB
-$mongoDBHost = '64.227.106.157';  // Reemplaza con la dirección IP de tu droplet
+$mongoDBHost = '64.23.157.97';  // Reemplaza con la dirección IP de tu droplet
 $mongoDBPort = 27017;  // Puerto por defecto de MongoDB
 $mongoDBName = 'Archives';  // Reemplaza con el nombre de tu base de datos
 $collectionName = 'BlogEntrees';  // Reemplaza con el nombre de tu colección
 $username = 'admin';  // Reemplaza con tu nombre de usuario
-$password = '8d95d9cfd76d7171e7c5781a577ae2f52426d9f06bb6f65a';  // Reemplaza con tu contraseña
+$password = 'f789389b6e55189def67a1af52ce996238ce41485f0a67b2';  // Reemplaza con tu contraseña
 
 try {
     // Configuración de autenticación

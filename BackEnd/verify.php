@@ -36,8 +36,6 @@
             // Usuario no registrado, mostrar mensaje de error
             $_SESSION['error'] = "Invalid token!";
             header("Location: ../login.php"); // Redirigir de nuevo al formulario de registro
-            $stmt->close();
-            $mysqli->close();
             exit();
         }
     }else{
