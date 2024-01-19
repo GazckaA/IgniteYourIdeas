@@ -1,4 +1,4 @@
-﻿<?php
+﻿<?php 
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
@@ -31,7 +31,7 @@ function sendVerificationEmail($name, $email, $token){
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = 'Verify your account - Ignite Your Ideas';
-        $mail->Body    = '<h1>Hello '.$name.'!</h1></br><h3>Verify your account to be able to log in.</h3></br><p>Click on the following link to verify your account: <a href="https://igniteyourideas.me/BackEnd/verify.php?token='.$token.'">VERIFY</a></p>';
+        $mail->Body    = '<h1>Hello '.$name.'!</h1></br><h3>Verify your account to be able to log in.</h3></br><p>Click on the following link to verify your account: <a href="https://www.igniteyourideas.me/BackEnd/verify.php?token='.$token.'">VERIFY</a></p>';
 
         $mail->send();
     }
@@ -62,7 +62,7 @@ function sendResetEmail($name, $email, $token){
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = 'Reset password - Ignite Your Ideas';
-        $mail->Body    = '<h1>Hello '.$name.'!</h1></br><h3>You requested a password reset.</h3></br><p>Click on the following link to reset your password: <a href="https://igniteyourideas.me/resetPassword.php?email='.$email.'&token='.$token.'">RESET PASSWORD</a></p>';
+        $mail->Body    = '<h1>Hello '.$name.'!</h1></br><h3>You requested a password reset.</h3></br><p>Click on the following link to reset your password: <a href="https://www.igniteyourideas.me/resetPassword.php?email='.$email.'&token='.$token.'">RESET PASSWORD</a></p>';
 
         $mail->send();
     }

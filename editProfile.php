@@ -288,7 +288,7 @@ session_start();
             if(cambio == 'success'){
               window.location.href = 'profile.php?username=<?php echo $pusername?>';
             }
-            else alert('Error updating profile');
+            else alert('Error updating profile: ' + cambio);
           }
         });
       }
