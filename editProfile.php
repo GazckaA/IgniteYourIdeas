@@ -284,7 +284,7 @@ session_start();
                 'image': image, 
                 'role': role},
           success: function(data){
-            cambio = data.substring(2);
+            cambio = data.substring(1);
             if(cambio == 'success'){
               window.location.href = 'profile.php?username=<?php echo $pusername?>';
             }
